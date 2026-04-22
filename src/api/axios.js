@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const API_URL = 'http://localhost:5000' || 'https://jamiabackend-ersd.onrender.com';
+export const API_URL = 'https://jamiabackend-ersd.onrender.com';
 
 const API = axios.create({
   baseURL: `${API_URL}/api`,
