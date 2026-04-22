@@ -31,7 +31,7 @@ export default function AdminUsers() {
 
   const filtered = users.filter(
     (u) =>
-      u.name?.toLowerCase().includes(search?.toLowerCase()) ||
+      u.username?.toLowerCase().includes(search?.toLowerCase()) ||
       u.email?.toLowerCase().includes(search?.toLowerCase())
   );
 
@@ -60,7 +60,7 @@ export default function AdminUsers() {
           <tbody>
             {filtered.map((u) => (
               <tr key={u._id} className="border-b hover:bg-gray-50">
-                <td className="p-3 font-bold">{u.name}</td>
+                <td className="p-3 font-bold">{u.username}</td>
                 <td className="p-3 text-sm">{u.email}</td>
                 <td className="p-3">
                   <span className={`px-2 py-1 rounded text-xs flex items-center gap-1 w-fit ${
