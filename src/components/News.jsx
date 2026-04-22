@@ -10,7 +10,7 @@ export default function News() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/news?lang=${language}`)
+      .get(`https://jamiabackend-ersd.onrender.com/api/news?lang=${language}`)
       .then((res) => setNews(res.data))
       .catch(() => setNews([]));
   }, [language]);
