@@ -1,8 +1,10 @@
 import axios from 'axios';
+export const API_URL = 'http://localhost:5000' || 'https://jamiabackend-ersd.onrender.com';
 
 const API = axios.create({
-  baseURL: 'https://jamiabackend-ersd.onrender.com/api' || 'http://localhost:5000/api',
+  baseURL: `${API_URL}/api`,
 });
+
 
 API.interceptors.request.use((config) => {
   const user = JSON.parse(localStorage.getItem('user'));

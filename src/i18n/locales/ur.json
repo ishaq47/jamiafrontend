@@ -17,6 +17,52 @@
     "dashboard": "ڈیش بورڈ",
     "admin": "ایڈمن پینل"
   },
+  
+  "categories": {
+    "all": "تمام",
+    "general": "عمومی",
+    "fiqh": "فقہ",
+    "aqeedah": "عقیدہ",
+    "hadith": "حدیث",
+    "tafseer": "تفسیر",
+    "seerah": "سیرت",
+    "family": "خاندان"
+  },
+  "pages": {
+    "aboutTitle": "ہمارے جامعہ کے بارے میں",
+    "aboutContent": "ہمارا ادارہ امت مسلمہ کی خالص اسلامی تعلیمات کے ساتھ خدمت کر رہا ہے۔",
+    "departmentsTitle": "تعلیمی شعبہ جات",
+    "admissionsTitle": "داخلہ",
+    "admissionsContent": "نئے تعلیمی سال کے لیے داخلے کھلے ہیں۔",
+    "fatawaTitle": "فتاویٰ",
+    "fatawaContent": "ہمارے علماء سے مستند اسلامی احکام ملاحظہ کریں۔",
+    "publicationsTitle": "ہماری مطبوعات",
+    "publicationsContent": "ہمارے اسلامی کتب کا مجموعہ دیکھیں۔",
+    "contactTitle": "ہم سے رابطہ",
+    "address": "پتہ",
+    "phone": "فون",
+    "email": "ای میل",
+    "send": "پیغام بھیجیں",
+    "yourMessage": "آپ کا پیغام"
+  },
+  "common": {
+    "loading": "لوڈ ہو رہا ہے...",
+    "search": "تلاش کریں...",
+    "noResults": "کوئی نتیجہ نہیں",
+    "previous": "پچھلا",
+    "next": "اگلا",
+    "page": "صفحہ",
+    "of": "کا",
+    "viewAll": "تمام دیکھیں",
+    "readMore": "مزید پڑھیں",
+    "back": "واپس",
+    "cancel": "منسوخ",
+    "confirm": "تصدیق",
+    "selectImage": "تصویر منتخب کریں",
+    "uploadImage": "تصویر اپ لوڈ کریں",
+    "or": "یا",
+    "imageUrl": "تصویر URL"
+  },
   "hero": {
     "title": "جامعہ علوم اسلامیہ میں خوش آمدید",
     "subtitle": "نسلوں کے لیے اسلامی علوم کا تحفظ",
@@ -58,14 +104,20 @@
   "auth": {
     "login": "لاگ ان",
     "register": "رجسٹر",
-    "name": "پورا نام",
+    "username": "پورا نام",
     "email": "ای میل",
     "password": "پاس ورڈ",
     "loginBtn": "داخل ہوں",
     "registerBtn": "رجسٹر کریں",
     "noAccount": "اکاؤنٹ نہیں ہے؟",
     "hasAccount": "پہلے سے اکاؤنٹ ہے؟",
-    "welcome": "خوش آمدید"
+    "welcome": "خوش آمدید",
+    "forgotPassword": "پاس ورڈ بھول گئے؟",
+    "resetPassword": "پاس ورڈ ری سیٹ",
+    "sendResetLink": "ری سیٹ لنک بھیجیں",
+    "newPassword": "نیا پاس ورڈ",
+    "resetSuccess": "پاس ورڈ ری سیٹ کامیاب",
+    "resetEmailSent": "ری سیٹ ای میل بھیج دی گئی!"
   },
   "admin": {
     "dashboard": "ایڈمن ڈیش بورڈ",
@@ -86,7 +138,17 @@
     "totalQuestions": "کل سوالات",
     "pendingQuestions": "زیر التواء",
     "answeredQuestions": "جواب شدہ",
-    "totalNews": "کل خبریں"
+    "totalNews": "کل خبریں",
+    "manageUsers": "صارفین کا انتظام",
+    "totalUsers": "کل صارفین",
+    "block": "بلاک کریں",
+    "unblock": "ان بلاک",
+    "makeAdmin": "ایڈمن بنائیں",
+    "removeAdmin": "ایڈمن ہٹائیں",
+    "role": "کردار",
+    "status": "حالت",
+    "joined": "شامل ہوئے",
+    "actions": "اقدامات"
   },
   "footer": {
     "rights": "جملہ حقوق محفوظ ہیں",

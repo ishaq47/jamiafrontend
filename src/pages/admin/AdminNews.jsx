@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import API from '../../api/axios';
-import { FaEdit, FaTrash, FaPlus, FaTimes } from 'react-icons/fa';
+import API, { API_URL } from '../../api/axios';
+import { FaEdit, FaTrash, FaPlus, FaTimes, FaUpload, FaLink } from 'react-icons/fa';
 
 const emptyForm = {
   title: { en: '', ur: '', ar: '' },
@@ -15,26 +15,61 @@ export default function AdminNews() {
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState(null);
   const [form, setForm] = useState(emptyForm);
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState('');
+  const [uploadMode, setUploadMode] = useState('file'); // 'file' or 'url'
+  const [loading, setLoading] = useState(false);
 
-  const load = () => API.get('/news/all').then((r) => setNews(r.data));
+  const load = () => API.get('/news/admin/all').then((r) => setNews(r.data));
 
   useEffect(() => { load(); }, []);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImageFile(file);
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      if (editId) {
-        await API.put(`/news/${editId}`, form);
-      } else {
-        await API.post('/news', form);
+      const formData = new FormData();
+      formData.append('title', JSON.stringify(form.title));
+      formData.append('description', JSON.stringify(form.description));
+
+      if (uploadMode === 'file' && imageFile) {
+        formData.append('image', imageFile);
+      } else if (uploadMode === 'url' && form.image) {
+        formData.append('image', form.image);
       }
-      setShowForm(false);
-      setEditId(null);
-      setForm(emptyForm);
+
+      const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+      if (editId) {
+        await API.put(`/news/${editId}`, formData, config);
+      } else {
+        await API.post('/news', formData, config);
+      }
+
+      resetForm();
       load();
     } catch (err) {
       alert(err.response?.data?.error || 'Error');
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const resetForm = () => {
+    setShowForm(false);
+    setEditId(null);
+    setForm(emptyForm);
+    setImageFile(null);
+    setImagePreview('');
+    setUploadMode('file');
   };
 
   const handleEdit = (item) => {
@@ -44,6 +79,8 @@ export default function AdminNews() {
       description: item.description,
       image: item.image || '',
     });
+    setImagePreview(item.image?.startsWith('/uploads/') ? `${API_URL}${item.image}` : item.image);
+    setUploadMode(item.image?.startsWith('/uploads/') ? 'file' : 'url');
     setShowForm(true);
   };
 
@@ -57,22 +94,18 @@ export default function AdminNews() {
     setForm({ ...form, [field]: { ...form[field], [lang]: value } });
   };
 
+  const getImageUrl = (img) => (img?.startsWith('/uploads/') ? `${API_URL}${img}` : img);
+
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-green-900">
-          {t('admin.manageNews')}
-        </h1>
+        <h1 className="text-3xl font-bold text-green-900">{t('admin.manageNews')}</h1>
         <button
-          onClick={() => {
-            setShowForm(!showForm);
-            setEditId(null);
-            setForm(emptyForm);
-          }}
+          onClick={() => showForm ? resetForm() : setShowForm(true)}
           className="bg-green-700 hover:bg-green-800 text-white px-5 py-2 rounded-lg flex items-center gap-2"
         >
           {showForm ? <FaTimes /> : <FaPlus />}
-          {showForm ? 'Close' : t('admin.addNews')}
+          {showForm ? t('common.cancel') : t('admin.addNews')}
         </button>
       </div>
 
@@ -82,14 +115,13 @@ export default function AdminNews() {
             {editId ? t('admin.editNews') : t('admin.addNews')}
           </h2>
 
-          {/* Title Multi-language */}
+          {/* Title */}
           <div>
             <label className="block font-bold mb-2">{t('admin.title')}</label>
             <div className="grid md:grid-cols-3 gap-3">
               {['en', 'ur', 'ar'].map((lang) => (
                 <input
-                  key={lang}
-                  type="text"
+                  key={lang} type="text"
                   placeholder={`Title (${lang.toUpperCase()})`}
                   value={form.title[lang]}
                   onChange={(e) => updateField('title', lang, e.target.value)}
@@ -101,7 +133,7 @@ export default function AdminNews() {
             </div>
           </div>
 
-          {/* Description Multi-language */}
+          {/* Description */}
           <div>
             <label className="block font-bold mb-2">{t('admin.description')}</label>
             <div className="grid md:grid-cols-3 gap-3">
@@ -120,26 +152,67 @@ export default function AdminNews() {
             </div>
           </div>
 
-          {/* Image */}
+          {/* Image Upload */}
           <div>
             <label className="block font-bold mb-2">{t('admin.image')}</label>
-            <input
-              type="url"
-              placeholder="https://example.com/image.jpg"
-              value={form.image}
-              onChange={(e) => setForm({ ...form, image: e.target.value })}
-              className="border rounded px-3 py-2 w-full"
-            />
-            {form.image && (
-              <img src={form.image} alt="" className="mt-2 h-32 object-cover rounded" />
+            <div className="flex gap-2 mb-3">
+              <button
+                type="button"
+                onClick={() => setUploadMode('file')}
+                className={`flex items-center gap-2 px-4 py-2 rounded ${
+                  uploadMode === 'file' ? 'bg-green-700 text-white' : 'bg-gray-200'
+                }`}
+              >
+                <FaUpload /> {t('common.uploadImage')}
+              </button>
+              <span className="self-center text-gray-500">{t('common.or')}</span>
+              <button
+                type="button"
+                onClick={() => setUploadMode('url')}
+                className={`flex items-center gap-2 px-4 py-2 rounded ${
+                  uploadMode === 'url' ? 'bg-green-700 text-white' : 'bg-gray-200'
+                }`}
+              >
+                <FaLink /> {t('common.imageUrl')}
+              </button>
+            </div>
+
+            {uploadMode === 'file' ? (
+              <div className="border-2 border-dashed rounded-lg p-6 text-center">
+                <input
+                  type="file" accept="image/*" onChange={handleFileChange}
+                  className="hidden" id="fileInput"
+                />
+                <label htmlFor="fileInput" className="cursor-pointer">
+                  <FaUpload className="mx-auto text-4xl text-gray-400 mb-2" />
+                  <p className="text-gray-600">{t('common.selectImage')}</p>
+                  <p className="text-xs text-gray-400 mt-1">Max 5MB (JPG, PNG, WEBP)</p>
+                </label>
+              </div>
+            ) : (
+              <input
+                type="url" placeholder="https://example.com/image.jpg"
+                value={form.image}
+                onChange={(e) => {
+                  setForm({ ...form, image: e.target.value });
+                  setImagePreview(e.target.value);
+                }}
+                className="border rounded px-3 py-2 w-full"
+              />
+            )}
+
+            {imagePreview && (
+              <div className="mt-3">
+                <img src={imagePreview} alt="preview" className="h-40 object-cover rounded border" />
+              </div>
             )}
           </div>
 
           <button
-            type="submit"
-            className="bg-green-800 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-bold"
+            type="submit" disabled={loading}
+            className="bg-green-800 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-bold disabled:opacity-60"
           >
-            {t('admin.save')}
+            {loading ? '...' : t('admin.save')}
           </button>
         </form>
       )}
@@ -149,7 +222,7 @@ export default function AdminNews() {
         {news.map((item) => (
           <div key={item._id} className="bg-white rounded-xl shadow overflow-hidden">
             {item.image && (
-              <img src={item.image} alt="" className="w-full h-48 object-cover" />
+              <img src={getImageUrl(item.image)} alt="" className="w-full h-48 object-cover" />
             )}
             <div className="p-5">
               <h3 className="font-bold text-green-900 mb-1">{item.title?.en}</h3>

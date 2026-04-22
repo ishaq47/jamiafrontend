@@ -34,16 +34,11 @@ export default function Login() {
           <p className="text-yellow-300 mt-2">{t('auth.welcome')}</p>
         </div>
         <form onSubmit={handleSubmit} className="p-8 space-y-4">
-          {error && (
-            <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
-          )}
+          {error && <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>}
           <div className="relative">
             <FaEnvelope className="absolute top-4 start-3 text-gray-400" />
             <input
-              type="email"
-              required
-              placeholder={t('auth.email')}
-              value={form.email}
+              type="email" required placeholder={t('auth.email')} value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full ps-10 pe-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
             />
@@ -51,18 +46,17 @@ export default function Login() {
           <div className="relative">
             <FaLock className="absolute top-4 start-3 text-gray-400" />
             <input
-              type="password"
-              required
-              placeholder={t('auth.password')}
-              value={form.password}
+              type="password" required placeholder={t('auth.password')} value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               className="w-full ps-10 pe-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
             />
           </div>
-          <button
-            disabled={loading}
-            className="w-full bg-green-800 hover:bg-green-700 text-white py-3 rounded-lg font-bold disabled:opacity-60"
-          >
+          <div className="text-end">
+            <Link to="/forgot-password" className="text-sm text-green-700 hover:underline">
+              {t('auth.forgotPassword')}
+            </Link>
+          </div>
+          <button disabled={loading} className="w-full bg-green-800 hover:bg-green-700 text-white py-3 rounded-lg font-bold disabled:opacity-60">
             {loading ? '...' : t('auth.loginBtn')}
           </button>
           <p className="text-center text-sm text-gray-600">

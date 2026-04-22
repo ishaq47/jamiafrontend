@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import API from '../api/axios';
-import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
+import QuestionCard from './QuestionCard';
 
 export default function QASection() {
   const { t } = useTranslation();
   const [questions, setQuestions] = useState([]);
-  const [expanded, setExpanded] = useState(null);
 
   useEffect(() => {
-    API.get('/questions/public')
-      .then((res) => setQuestions(res.data))
-      .catch(() => setQuestions([]));
+    API.get('/questions/public?limit=5').then((res) => setQuestions(res.data.questions));
   }, []);
 
   return (
@@ -26,45 +24,14 @@ export default function QASection() {
           <p className="text-center text-gray-500">{t('qa.noQuestions')}</p>
         ) : (
           <div className="space-y-4">
-            {questions.map((q) => (
-              <div
-                key={q._id}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition border-s-4 border-green-700 overflow-hidden"
-              >
-                <button
-                  onClick={() => setExpanded(expanded === q._id ? null : q._id)}
-                  className="w-full p-5 text-start flex justify-between items-start gap-4"
-                >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                      <FaUserCircle />
-                      <span>{q.userName}</span>
-                      <span className="text-green-600 flex items-center gap-1">
-                        <FaCheckCircle /> {t('qa.answered')}
-                      </span>
-                    </div>
-                    <h3 className="font-bold text-lg text-green-900">
-                      {q.question}
-                    </h3>
-                  </div>
-                  <span className="text-yellow-600 text-2xl">
-                    {expanded === q._id ? '−' : '+'}
-                  </span>
-                </button>
-                {expanded === q._id && (
-                  <div className="px-5 pb-5 bg-yellow-50 border-t border-yellow-200">
-                    <h4 className="font-bold text-green-800 mt-3 mb-2">
-                      {t('qa.answer')}:
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                      {q.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+            {questions.map((q) => <QuestionCard key={q._id} q={q} />)}
           </div>
         )}
+        <div className="text-center mt-8">
+          <Link to="/qa" className="inline-block bg-green-800 hover:bg-green-700 text-white px-8 py-3 rounded-full font-bold">
+            {t('common.viewAll')} →
+          </Link>
+        </div>
       </div>
     </section>
   );

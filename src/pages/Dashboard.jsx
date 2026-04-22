@@ -22,15 +22,11 @@ export default function Dashboard() {
 
       <div className="space-y-4">
         {questions.map((q) => (
-          <div
-            key={q._id}
+          <div key={q._id}
             className={`bg-white p-5 rounded-lg shadow border-s-4 ${
-              q.status === 'answered'
-                ? 'border-green-600'
-                : 'border-yellow-500'
-            }`}
-          >
-            <div className="flex items-center gap-2 text-sm mb-2">
+              q.status === 'answered' ? 'border-green-600' : 'border-yellow-500'
+            }`}>
+            <div className="flex items-center gap-2 text-sm mb-2 flex-wrap">
               {q.status === 'answered' ? (
                 <span className="text-green-700 flex items-center gap-1">
                   <FaCheckCircle /> {t('qa.answered')}
@@ -40,22 +36,22 @@ export default function Dashboard() {
                   <FaClock /> {t('qa.pending')}
                 </span>
               )}
-              <span className="text-gray-400">
-                {new Date(q.createdAt).toLocaleDateString()}
+              <span className="text-gray-400">{new Date(q.createdAt).toLocaleDateString()}</span>
+              <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">
+                {t(`categories.${q.category}`)}
               </span>
             </div>
             <p className="font-bold text-gray-800 mb-2">{q.question}</p>
             {q.answer && (
               <div className="mt-3 p-3 bg-green-50 rounded border-s-2 border-green-500">
-                <p className="text-gray-700 whitespace-pre-wrap">{q.answer}</p>
+                <div className="text-gray-700 prose prose-sm max-w-none"
+                  dangerouslySetInnerHTML={{ __html: q.answer }} />
               </div>
             )}
           </div>
         ))}
         {questions.length === 0 && (
-          <p className="text-center text-gray-500 py-12">
-            {t('qa.noQuestions')}
-          </p>
+          <p className="text-center text-gray-500 py-12">{t('qa.noQuestions')}</p>
         )}
       </div>
     </div>

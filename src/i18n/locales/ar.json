@@ -17,6 +17,51 @@
     "dashboard": "لوحة التحكم",
     "admin": "لوحة الإدارة"
   },
+   "categories": {
+    "all": "الكل",
+    "general": "عام",
+    "fiqh": "الفقه",
+    "aqeedah": "العقيدة",
+    "hadith": "الحديث",
+    "tafseer": "التفسير",
+    "seerah": "السيرة",
+    "family": "الأسرة"
+  },
+  "pages": {
+    "aboutTitle": "عن جامعتنا",
+    "aboutContent": "تخدم مؤسستنا الأمة الإسلامية بالتعليم الإسلامي الأصيل.",
+    "departmentsTitle": "الأقسام الأكاديمية",
+    "admissionsTitle": "القبول",
+    "admissionsContent": "القبول مفتوح للعام الدراسي الجديد.",
+    "fatawaTitle": "الفتاوى",
+    "fatawaContent": "تصفح الأحكام الإسلامية الأصيلة من علمائنا.",
+    "publicationsTitle": "منشوراتنا",
+    "publicationsContent": "استكشف مجموعتنا من الكتب الإسلامية.",
+    "contactTitle": "اتصل بنا",
+    "address": "العنوان",
+    "phone": "الهاتف",
+    "email": "البريد",
+    "send": "إرسال الرسالة",
+    "yourMessage": "رسالتك"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "search": "بحث...",
+    "noResults": "لا توجد نتائج",
+    "previous": "السابق",
+    "next": "التالي",
+    "page": "صفحة",
+    "of": "من",
+    "viewAll": "عرض الكل",
+    "readMore": "اقرأ المزيد",
+    "back": "رجوع",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "selectImage": "اختر صورة",
+    "uploadImage": "رفع صورة",
+    "or": "أو",
+    "imageUrl": "رابط الصورة"
+  },
   "hero": {
     "title": "مرحباً بكم في جامعة العلوم الإسلامية",
     "subtitle": "الحفاظ على المعرفة الإسلامية للأجيال",
@@ -58,14 +103,20 @@
   "auth": {
     "login": "تسجيل الدخول",
     "register": "التسجيل",
-    "name": "الاسم الكامل",
+    "username": "الاسم الكامل",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
     "loginBtn": "دخول",
     "registerBtn": "تسجيل",
     "noAccount": "ليس لديك حساب؟",
     "hasAccount": "لديك حساب بالفعل؟",
-    "welcome": "مرحباً بعودتك"
+    "welcome": "مرحباً بعودتك",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "sendResetLink": "إرسال رابط إعادة التعيين",
+    "newPassword": "كلمة مرور جديدة",
+    "resetSuccess": "تم إعادة تعيين كلمة المرور",
+    "resetEmailSent": "تم إرسال البريد الإلكتروني!"
   },
   "admin": {
     "dashboard": "لوحة الإدارة",
@@ -86,7 +137,17 @@
     "totalQuestions": "مجموع الأسئلة",
     "pendingQuestions": "قيد الانتظار",
     "answeredQuestions": "مجاب عليها",
-    "totalNews": "مجموع الأخبار"
+    "totalNews": "مجموع الأخبار",
+     "manageUsers": "إدارة المستخدمين",
+    "totalUsers": "إجمالي المستخدمين",
+    "block": "حظر",
+    "unblock": "إلغاء الحظر",
+    "makeAdmin": "جعله مشرف",
+    "removeAdmin": "إزالة المشرف",
+    "role": "الدور",
+    "status": "الحالة",
+    "joined": "انضم",
+    "actions": "الإجراءات"
   },
   "footer": {
     "rights": "جميع الحقوق محفوظة",
