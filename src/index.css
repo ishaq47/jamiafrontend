@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Jameel Noori';
+  src: url('/fonts/JameelNooriNastaleeq.ttf');
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+[dir="rtl"] {
+  font-family: 'Jameel Noori', 'Amiri', serif;
+}
+
+.arabic-text {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+}
+
+.urdu-text {
+  font-family: 'Jameel Noori', 'Noto Nastaliq Urdu', serif;
+}

@@ -1,0 +1,96 @@
+{
+  "siteName": "جامعہ علوم اسلامیہ",
+  "tagline": "مرکز تعلیمات اسلامیہ",
+  "nav": {
+    "home": "صفحہ اول",
+    "about": "تعارف",
+    "departments": "شعبہ جات",
+    "admissions": "داخلہ",
+    "fatawa": "فتاویٰ",
+    "publications": "مطبوعات",
+    "news": "خبریں",
+    "contact": "رابطہ",
+    "qa": "سوال و جواب",
+    "login": "لاگ ان",
+    "register": "رجسٹر",
+    "logout": "لاگ آؤٹ",
+    "dashboard": "ڈیش بورڈ",
+    "admin": "ایڈمن پینل"
+  },
+  "hero": {
+    "title": "جامعہ علوم اسلامیہ میں خوش آمدید",
+    "subtitle": "نسلوں کے لیے اسلامی علوم کا تحفظ",
+    "cta": "مزید جانیں",
+    "askTitle": "اپنا سوال پوچھیں",
+    "askSubtitle": "ہمارے علماء سے جوابات حاصل کریں",
+    "askPlaceholder": "اپنا سوال یہاں لکھیں...",
+    "askButton": "سوال جمع کریں",
+    "loginToAsk": "سوال پوچھنے کے لیے لاگ ان کریں"
+  },
+  "about": {
+    "title": "جامعہ کے بارے میں",
+    "description": "خالص اسلامی علوم کی اشاعت کے مقصد سے قائم ہونے والا یہ ادارہ عشروں سے امت کی خدمت کر رہا ہے۔"
+  },
+  "departments": {
+    "title": "ہمارے شعبہ جات",
+    "dars": "درس نظامی",
+    "hifz": "حفظ القرآن",
+    "tajweed": "تجوید",
+    "ifta": "افتاء",
+    "hadith": "علوم حدیث",
+    "arabic": "ادب عربی"
+  },
+  "news": {
+    "title": "تازہ خبریں و اعلانات"
+  },
+  "qa": {
+    "title": "سوال و جواب",
+    "question": "سوال",
+    "answer": "جواب",
+    "askedBy": "سائل",
+    "pending": "زیر التواء",
+    "answered": "جواب دیا گیا",
+    "noQuestions": "ابھی تک کوئی سوال نہیں",
+    "myQuestions": "میرے سوالات",
+    "category": "زمرہ",
+    "submitSuccess": "سوال کامیابی سے جمع ہو گیا!"
+  },
+  "auth": {
+    "login": "لاگ ان",
+    "register": "رجسٹر",
+    "name": "پورا نام",
+    "email": "ای میل",
+    "password": "پاس ورڈ",
+    "loginBtn": "داخل ہوں",
+    "registerBtn": "رجسٹر کریں",
+    "noAccount": "اکاؤنٹ نہیں ہے؟",
+    "hasAccount": "پہلے سے اکاؤنٹ ہے؟",
+    "welcome": "خوش آمدید"
+  },
+  "admin": {
+    "dashboard": "ایڈمن ڈیش بورڈ",
+    "manageNews": "خبروں کا انتظام",
+    "manageQuestions": "سوالات کا انتظام",
+    "backToHome" : "واپس",
+    "addNews": "خبر شامل کریں",
+    "editNews": "خبر میں ترمیم",
+    "title": "عنوان",
+    "description": "تفصیل",
+    "image": "تصویر URL",
+    "save": "محفوظ کریں",
+    "delete": "حذف کریں",
+    "edit": "ترمیم",
+    "answerQuestion": "جواب دیں",
+    "typeAnswer": "اپنا جواب لکھیں...",
+    "submit": "جمع کریں",
+    "totalQuestions": "کل سوالات",
+    "pendingQuestions": "زیر التواء",
+    "answeredQuestions": "جواب شدہ",
+    "totalNews": "کل خبریں"
+  },
+  "footer": {
+    "rights": "جملہ حقوق محفوظ ہیں",
+    "quickLinks": "اہم روابط",
+    "contact": "رابطہ معلومات"
+  }
+}

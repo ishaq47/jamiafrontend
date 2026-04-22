@@ -1,0 +1,96 @@
+{
+  "siteName": "Jamia Uloom Islamia",
+  "tagline": "Center of Islamic Education",
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "departments": "Departments",
+    "admissions": "Admissions",
+    "fatawa": "Fatawa",
+    "publications": "Publications",
+    "news": "News",
+    "contact": "Contact",
+    "qa": "Q&A",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "dashboard": "Dashboard",
+    "admin": "Admin Panel"
+  },
+  "hero": {
+    "title": "Welcome to Jamia Uloom Islamia",
+    "subtitle": "Preserving Islamic Knowledge for Generations",
+    "cta": "Learn More",
+    "askTitle": "Ask Your Question",
+    "askSubtitle": "Get answers from our scholars",
+    "askPlaceholder": "Type your question here...",
+    "askButton": "Submit Question",
+    "loginToAsk": "Please login to ask a question"
+  },
+  "about": {
+    "title": "About the Jamia",
+    "description": "Established with the vision of spreading authentic Islamic knowledge, our institution has been serving the Ummah for decades."
+  },
+  "departments": {
+    "title": "Our Departments",
+    "dars": "Dars-e-Nizami",
+    "hifz": "Hifz-ul-Quran",
+    "tajweed": "Tajweed",
+    "ifta": "Ifta",
+    "hadith": "Hadith Studies",
+    "arabic": "Arabic Literature"
+  },
+  "news": {
+    "title": "Latest News & Announcements"
+  },
+  "qa": {
+    "title": "Questions & Answers",
+    "question": "Question",
+    "answer": "Answer",
+    "askedBy": "Asked by",
+    "pending": "Pending",
+    "answered": "Answered",
+    "noQuestions": "No questions yet",
+    "myQuestions": "My Questions",
+    "category": "Category",
+    "submitSuccess": "Question submitted successfully!"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "loginBtn": "Sign In",
+    "registerBtn": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "welcome": "Welcome back"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "manageNews": "Manage News",
+    "manageQuestions": "Manage Questions",
+    "backToHome" : "Back to home",
+    "addNews": "Add News",
+    "editNews": "Edit News",
+    "title": "Title",
+    "description": "Description",
+    "image": "Image URL",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "answerQuestion": "Answer Question",
+    "typeAnswer": "Type your answer...",
+    "submit": "Submit",
+    "totalQuestions": "Total Questions",
+    "pendingQuestions": "Pending",
+    "answeredQuestions": "Answered",
+    "totalNews": "Total News"
+  },
+  "footer": {
+    "rights": "All Rights Reserved",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Information"
+  }
+}

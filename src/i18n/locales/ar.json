@@ -1,0 +1,96 @@
+{
+  "siteName": "جامعة العلوم الإسلامية",
+  "tagline": "مركز التعليمات الإسلامية",
+  "nav": {
+    "home": "الرئيسية",
+    "about": "عن الجامعة",
+    "departments": "الأقسام",
+    "admissions": "القبول",
+    "fatawa": "الفتاوى",
+    "publications": "المطبوعات",
+    "news": "الأخبار",
+    "contact": "اتصل بنا",
+    "qa": "أسئلة وأجوبة",
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "logout": "خروج",
+    "dashboard": "لوحة التحكم",
+    "admin": "لوحة الإدارة"
+  },
+  "hero": {
+    "title": "مرحباً بكم في جامعة العلوم الإسلامية",
+    "subtitle": "الحفاظ على المعرفة الإسلامية للأجيال",
+    "cta": "اعرف المزيد",
+    "askTitle": "اطرح سؤالك",
+    "askSubtitle": "احصل على إجابات من علمائنا",
+    "askPlaceholder": "اكتب سؤالك هنا...",
+    "askButton": "إرسال السؤال",
+    "loginToAsk": "يرجى تسجيل الدخول لطرح سؤال"
+  },
+  "about": {
+    "title": "عن الجامعة",
+    "description": "تأسست برؤية نشر المعرفة الإسلامية الأصيلة، وتخدم مؤسستنا الأمة منذ عقود."
+  },
+  "departments": {
+    "title": "أقسامنا",
+    "dars": "درس النظامي",
+    "hifz": "حفظ القرآن",
+    "tajweed": "التجويد",
+    "ifta": "الإفتاء",
+    "hadith": "علوم الحديث",
+    "arabic": "الأدب العربي"
+  },
+  "news": {
+    "title": "آخر الأخبار والإعلانات"
+  },
+  "qa": {
+    "title": "الأسئلة والأجوبة",
+    "question": "السؤال",
+    "answer": "الجواب",
+    "askedBy": "سأل بواسطة",
+    "pending": "قيد الانتظار",
+    "answered": "تمت الإجابة",
+    "noQuestions": "لا توجد أسئلة بعد",
+    "myQuestions": "أسئلتي",
+    "category": "الفئة",
+    "submitSuccess": "تم إرسال السؤال بنجاح!"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "register": "التسجيل",
+    "name": "الاسم الكامل",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "loginBtn": "دخول",
+    "registerBtn": "تسجيل",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "welcome": "مرحباً بعودتك"
+  },
+  "admin": {
+    "dashboard": "لوحة الإدارة",
+    "manageNews": "إدارة الأخبار",
+    "manageQuestions": "إدارة الأسئلة",
+    "backToHome":"خلف",
+    "addNews": "إضافة خبر",
+    "editNews": "تعديل الخبر",
+    "title": "العنوان",
+    "description": "الوصف",
+    "image": "رابط الصورة",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "answerQuestion": "أجب السؤال",
+    "typeAnswer": "اكتب إجابتك...",
+    "submit": "إرسال",
+    "totalQuestions": "مجموع الأسئلة",
+    "pendingQuestions": "قيد الانتظار",
+    "answeredQuestions": "مجاب عليها",
+    "totalNews": "مجموع الأخبار"
+  },
+  "footer": {
+    "rights": "جميع الحقوق محفوظة",
+    "quickLinks": "روابط سريعة",
+    "contact": "معلومات الاتصال"
+  }
+}
