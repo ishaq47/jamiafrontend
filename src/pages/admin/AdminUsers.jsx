@@ -79,6 +79,7 @@ export default function AdminUsers() {
                 </td>
                 <td className="p-3 text-sm">{new Date(u.createdAt).toLocaleDateString()}</td>
                 <td className="p-3">
+                  { u.role !== 'admin' &&
                   <div className="flex gap-1 flex-wrap">
                     <button
                       onClick={() => toggleRole(u._id)}
@@ -103,6 +104,7 @@ export default function AdminUsers() {
                       <FaTrash />
                     </button>
                   </div>
+                  }
                 </td>
               </tr>
             ))}
