@@ -6,4 +6,4 @@ Disallow: /login
 Disallow: /register
 Disallow: /reset-password
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: jamiafrontend-henna.vercel.app/sitemap.xml

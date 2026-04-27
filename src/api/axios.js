@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-
+export const frontedDomain = 'https://jamiafrontend-henna.vercel.app'
 // export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 export const API_URL = 'https://jamiabackend-ersd.onrender.com';
 

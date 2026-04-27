@@ -125,13 +125,13 @@ export default function Hero() {
           <div className="flex flex-wrap gap-3">
             <Link
               to="/about"
-              className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-6 py-3 rounded-lg transition flex items-center gap-2"
+              className="bg-white text-slate-900 hover:bg-slate-100 hover:scale-105 font-medium px-4 py-2 rounded-lg transition flex items-center gap-2"
             >
               {t('hero.cta')} <FaArrowRight className="rtl:rotate-180" />
             </Link>
             <Link
               to="/admissions/apply"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition"
+              className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-medium px-4 py-2 rounded-lg transition"
             >
               {t('apply.applyNow')}
             </Link>

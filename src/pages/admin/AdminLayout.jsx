@@ -15,14 +15,14 @@ export default function AdminLayout() {
   const linkClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-lg transition ${
       isActive
-        ? "bg-yellow-500 text-green-900 font-bold"
-        : "text-white hover:bg-green-700"
+        ? "bg-white text-slate-900 font-bold"
+        : "text-white hover:bg-slate-700"
     }`;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
-      <aside className="w-64 bg-green-900 text-white p-5 hidden md:block">
-        <h2 className="text-2xl font-bold mb-8 text-yellow-400">
+    <div className="min-h-screen bg-slate-100 flex">
+      <aside className="w-64 bg-slate-900 text-white p-5 hidden md:block">
+        <h2 className="text-2xl font-bold mb-8 text-slate-100">
           {t("admin.dashboard")}
         </h2>
         <nav className="space-y-2">

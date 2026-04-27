@@ -2,50 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://yourdomain.com/</loc>
+    <loc>jamiafrontend-henna.vercel.app/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://yourdomain.com/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ur" href="https://yourdomain.com/?lang=ur"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://yourdomain.com/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="jamiafrontend-henna.vercel.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ur" href="jamiafrontend-henna.vercel.app/?lang=ur"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="jamiafrontend-henna.vercel.app/?lang=ar"/>
   </url>
   <url>
-    <loc>https://yourdomain.com/about</loc>
+    <loc>jamiafrontend-henna.vercel.app/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/qa</loc>
+    <loc>jamiafrontend-henna.vercel.app/qa</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/fatawa</loc>
+    <loc>jamiafrontend-henna.vercel.app/fatawa</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/news</loc>
+    <loc>jamiafrontend-henna.vercel.app/news</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/departments</loc>
+    <loc>jamiafrontend-henna.vercel.app/departments</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/admissions</loc>
+    <loc>jamiafrontend-henna.vercel.app/admissions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/admissions/apply</loc>
+    <loc>jamiafrontend-henna.vercel.app/admissions/apply</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yourdomain.com/contact</loc>
+    <loc>jamiafrontend-henna.vercel.app/contact</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>

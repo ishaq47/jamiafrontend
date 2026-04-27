@@ -37,7 +37,7 @@ export default function AdminUsers() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-green-900 mb-6">{t('admin.manageUsers')}</h1>
+      <h1 className="text-3xl font-bold text-slate-900 mb-6">{t('admin.manageUsers')}</h1>
 
       <input
         type="text" placeholder={t('common.search')}
@@ -47,7 +47,7 @@ export default function AdminUsers() {
 
       <div className="bg-white rounded-xl shadow overflow-x-auto">
         <table className="w-full">
-          <thead className="bg-green-900 text-white">
+          <thead className="bg-slate-900 text-white">
             <tr>
               <th className="p-3 text-start">Name</th>
               <th className="p-3 text-start">{t('auth.email')}</th>
@@ -72,7 +72,7 @@ export default function AdminUsers() {
                 </td>
                 <td className="p-3">
                   <span className={`px-2 py-1 rounded text-xs ${
-                    u.isBlocked ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
+                    u.isBlocked ? 'bg-red-100 text-red-700' : 'bg-green-100 text-slate-700'
                   }`}>
                     {u.isBlocked ? 'Blocked' : 'Active'}
                   </span>
@@ -91,7 +91,7 @@ export default function AdminUsers() {
                     <button
                       onClick={() => toggleBlock(u._id)}
                       className={`px-3 py-1 rounded text-xs text-white ${
-                        u.isBlocked ? 'bg-green-500 hover:bg-green-600' : 'bg-orange-500 hover:bg-orange-600'
+                        u.isBlocked ? 'bg-slate-500 hover:bg-slate-600' : 'bg-orange-500 hover:bg-orange-600'
                       }`}
                       title={u.isBlocked ? t('admin.unblock') : t('admin.block')}
                     >

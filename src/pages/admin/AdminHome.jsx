@@ -34,7 +34,7 @@ export default function AdminHome() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-green-900 mb-6">{t('admin.dashboard')}</h1>
+      <h1 className="text-3xl font-bold text-slate-900 mb-6">{t('admin.dashboard')}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
         {cards.map((c) => (
           <div key={c.label} className="bg-white p-6 rounded-xl shadow">

@@ -4,8 +4,8 @@ export const organizationSchema = {
   name: 'Jamia Uloom Islamia',
   alternateName: ['جامعہ علوم اسلامیہ', 'جامعة العلوم الإسلامية'],
   description: 'Center of Islamic Education providing authentic Islamic knowledge',
-  url: 'https://yourdomain.com',
-  logo: 'https://yourdomain.com/logo.png',
+  url: 'jamiafrontend-henna.vercel.app',
+  logo: 'jamiafrontend-henna.vercel.app/logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: '+92-300-0000000',
@@ -30,10 +30,10 @@ export const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Jamia Uloom Islamia',
-  url: 'https://yourdomain.com',
+  url: 'jamiafrontend-henna.vercel.app',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://yourdomain.com/qa?search={search_term_string}',
+    target: 'jamiafrontend-henna.vercel.app/qa?search={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };
@@ -66,7 +66,7 @@ export const articleSchema = (article) => ({
   publisher: {
     '@type': 'Organization',
     name: 'Jamia Uloom Islamia',
-    logo: { '@type': 'ImageObject', url: 'https://yourdomain.com/logo.png' },
+    logo: { '@type': 'ImageObject', url: 'jamiafrontend-henna.vercel.app/logo.png' },
   },
 });
 
@@ -78,6 +78,6 @@ export const courseSchema = (department) => ({
   provider: {
     '@type': 'Organization',
     name: 'Jamia Uloom Islamia',
-    sameAs: 'https://yourdomain.com',
+    sameAs: 'jamiafrontend-henna.vercel.app',
   },
 });

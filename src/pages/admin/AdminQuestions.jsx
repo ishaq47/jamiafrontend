@@ -47,14 +47,14 @@ export default function AdminQuestions() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-green-900 mb-6">{t('admin.manageQuestions')}</h1>
+      <h1 className="text-3xl font-bold text-slate-900 mb-6">{t('admin.manageQuestions')}</h1>
 
       <div className="flex gap-2 mb-6 flex-wrap">
         {['all', 'pending', 'answered'].map((f) => (
           <button
             key={f} onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-lg capitalize ${
-              filter === f ? 'bg-green-800 text-white' : 'bg-white text-gray-700'
+              filter === f ? 'bg-slate-800 text-white' : 'bg-white text-gray-700'
             }`}
           >
             {f} ({filter === f ? filtered.length : questions.filter(q => f === 'all' ? true : q.status === f).length})
@@ -98,8 +98,8 @@ export default function AdminQuestions() {
               <div className={`grid transition-all duration-300 ${expanded === q._id ? 'grid-rows-[1fr] mt-3' : 'grid-rows-[0fr]'}`}>
                 <div className="overflow-hidden">
                   {q.answer && (
-                    <div className="p-3 bg-green-50 rounded mb-3">
-                      <p className="text-sm font-bold text-green-800 mb-1">Answer:</p>
+                    <div className="p-3 bg-slate-50 rounded mb-3">
+                      <p className="text-sm font-bold text-slate-800 mb-1">Answer:</p>
                       <div className="text-gray-700 prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: q.answer }} />
                     </div>
                   )}
@@ -113,18 +113,18 @@ export default function AdminQuestions() {
                       />
                       <div className="flex gap-2 mt-12">
                         <button onClick={() => handleAnswer(q._id)}
-                          className="bg-green-700 text-white px-5 py-2 rounded flex items-center gap-2">
+                          className="bg-blue-700 text-white px-5 py-2 rounded-lg flex items-center gap-2">
                           <FaCheck /> {t('admin.submit')}
                         </button>
                         <button onClick={() => { setActiveId(null); setAnswer(''); }}
-                          className="bg-gray-300 px-5 py-2 rounded">
+                          className="bg-gray-300 px-5 py-2 rounded-lg">
                           {t('common.cancel')}
                         </button>
                       </div>
                     </div>
                   ) : (
                     <button onClick={() => { setActiveId(q._id); setAnswer(q.answer || ''); }}
-                      className="bg-yellow-500 text-green-900 px-4 py-2 rounded font-bold">
+                      className="border border-slate-200 text-slate-700 hover:border-slate-300 cursor-pointer px-3 py-1 rounded-lg font-bold">
                       {q.answer ? t('admin.edit') : t('admin.answerQuestion')}
                     </button>
                   )}

@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import { FaBars, FaTimes, FaGlobe, FaUserCircle, FaCalendarAlt, FaChevronDown } from 'react-icons/fa';
 import { formatDate, getHijriDate } from '../utils/dateFormatter';
-
+import webLogo from '../../public/webLogo.png';
 export default function Navbar() {
   const { t } = useTranslation();
   const { language, setLanguage } = useLanguage();
@@ -17,6 +17,7 @@ export default function Navbar() {
   const [userOpen, setUserOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(formatDate(language));
   const [hijriDate] = useState(getHijriDate());
+  
 
   useEffect(() => setCurrentDate(formatDate(language)), [language]);
   useEffect(() => setIsOpen(false), [location]);
@@ -59,8 +60,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-18 py-3">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">ج</span>
+              <div className="w-14 h-14  rounded-xl flex items-center justify-center">
+                <img src={webLogo} alt="logo"  />
               </div>
               <div>
                 <h1 className="text-base font-bold text-slate-900">{t('siteName')}</h1>
