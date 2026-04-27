@@ -25,7 +25,7 @@ export default function QAPage() {
     if (search) params.append('search', search);
     API.get(`/questions/public?${params}`).then((r) => setData(r.data));
   };
-
+console.log("data123", data)
   useEffect(() => { load(); }, [page, category]);
 
   useEffect(() => {
