@@ -30,7 +30,10 @@ export default function QuestionCard({ q }) {
         <div className="overflow-hidden">
           <div className="px-5 pb-5 border-t border-slate-100 pt-4">
             <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">{t('qa.answer')}</h4>
-            <div className="text-slate-700 prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: q.answer }} />
+            <div 
+  className="text-slate-700 text-[15px] leading-relaxed space-y-3 max-w-none"
+  dangerouslySetInnerHTML={{ __html: q.answer }}
+/>
           </div>
         </div>
       </div>
