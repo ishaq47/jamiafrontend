@@ -29,6 +29,7 @@ import AdminUsers from './pages/admin/AdminUsers';
 import './i18n/i18n';
 import AdminApplications from './pages/admin/AdminApplications';
 import ApplyForm from './pages/ApplyForm';
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 
 function Layout({ children }) {
   return (
@@ -36,6 +37,7 @@ function Layout({ children }) {
       <Navbar />
       {children}
       <Footer />
+      <FloatingWhatsApp />
     </>
   );
 }
