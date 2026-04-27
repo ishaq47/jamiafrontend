@@ -17,7 +17,7 @@ export default function Contact() {
   };
 
   const contactInfo = [
-    { icon: FaMapMarkerAlt, label: t('pages.address'), val: 'Main Street, Karachi, Pakistan' },
+    { icon: FaMapMarkerAlt, label: t('pages.address'), val: 'Shah Mansoor, Swabi, Pakistan' },
     { icon: FaPhone, label: t('pages.phone'), val: '+92 300 0000000' },
     { icon: FaEnvelope, label: t('pages.email'), val: 'info@jamia.edu' },
     { icon: FaClock, label: 'Office Hours', val: 'Mon-Fri: 9 AM - 5 PM' },

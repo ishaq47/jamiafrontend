@@ -8,7 +8,11 @@ import API from '../api/axios';
 const slides = [
   {
     image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1920&q=80',
-    title: { en: 'Welcome to Jamia Uloom Islamia', ur: 'جامعہ علوم اسلامیہ میں خوش آمدید', ar: 'مرحباً بكم في جامعة العلوم الإسلامية' },
+    title: {
+  en: 'Welcome to Jamia Darul Uloom Shah Mansoor',
+  ur: 'جامعہ دارالعلوم شاہ منصور میں خوش آمدید',
+  ar: 'مرحباً بكم في جامعة دار العلوم شاه منصور'
+},
     subtitle: { en: 'Preserving Islamic Knowledge for Generations', ur: 'نسلوں کے لیے اسلامی علوم کا تحفظ', ar: 'الحفاظ على المعرفة الإسلامية للأجيال' },
   },
   {
