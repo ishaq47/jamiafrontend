@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
-import { FaBars, FaTimes, FaGlobe, FaUserCircle, FaCalendarAlt } from 'react-icons/fa';
+import { FaBars, FaTimes, FaGlobe, FaUserCircle, FaCalendarAlt, FaChevronDown } from 'react-icons/fa';
 import { formatDate, getHijriDate } from '../utils/dateFormatter';
 
 export default function Navbar() {
@@ -11,15 +11,15 @@ export default function Navbar() {
   const { language, setLanguage } = useLanguage();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [userOpen, setUserOpen] = useState(false);
   const [currentDate, setCurrentDate] = useState(formatDate(language));
   const [hijriDate] = useState(getHijriDate());
 
-  useEffect(() => {
-    setCurrentDate(formatDate(language));
-  }, [language]);
+  useEffect(() => setCurrentDate(formatDate(language)), [language]);
+  useEffect(() => setIsOpen(false), [location]);
 
   const navItems = [
     { key: 'home', path: '/' },
@@ -27,7 +27,6 @@ export default function Navbar() {
     { key: 'departments', path: '/departments' },
     { key: 'qa', path: '/qa' },
     { key: 'admissions', path: '/admissions' },
-    { key: 'fatawa', path: '/fatawa' },
     { key: 'news', path: '/news' },
     { key: 'contact', path: '/contact' },
   ];
@@ -46,63 +45,63 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Top Bar with Date */}
-      <div className="bg-green-950 text-yellow-300 text-xs py-2 px-4">
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
           <div className="flex items-center gap-2">
-            <FaCalendarAlt />
+            <FaCalendarAlt className="text-slate-400" />
             <span>{currentDate}</span>
           </div>
-          {hijriDate && (
-            <div className="flex items-center gap-2">
-              <span className="text-yellow-200">🌙 {hijriDate}</span>
-            </div>
-          )}
+          {hijriDate && <div className="text-slate-400">{hijriDate}</div>}
         </div>
       </div>
 
-      <nav className="bg-green-900 text-white shadow-lg sticky top-0 z-50">
+      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-18 py-3">
             <Link to="/" className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
-                <span className="text-green-900 font-bold text-xl">ج</span>
+              <div className="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold">ج</span>
               </div>
               <div>
-                <h1 className="text-lg font-bold">{t('siteName')}</h1>
-                <p className="text-xs text-yellow-300">{t('tagline')}</p>
+                <h1 className="text-base font-bold text-slate-900">{t('siteName')}</h1>
+                <p className="text-xs text-slate-500">{t('tagline')}</p>
               </div>
             </Link>
 
             <div className="hidden lg:flex items-center gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.key}
-                  to={item.path}
-                  className="px-2 py-2 rounded hover:bg-green-700 transition text-sm"
-                >
-                  {t(`nav.${item.key}`)}
-                </Link>
-              ))}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.key}
+                    to={item.path}
+                    className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
+                      isActive ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    }`}
+                  >
+                    {t(`nav.${item.key}`)}
+                  </Link>
+                );
+              })}
 
               <div className="relative ms-2">
                 <button
                   onClick={() => setLangOpen(!langOpen)}
-                  className="flex items-center gap-2 px-3 py-2 bg-yellow-500 text-green-900 rounded hover:bg-yellow-400"
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm text-slate-600 hover:bg-slate-50 rounded-lg"
                 >
-                  <FaGlobe />
+                  <FaGlobe size={14} />
                   {languages.find((l) => l.code === language)?.label}
+                  <FaChevronDown size={10} />
                 </button>
                 {langOpen && (
-                  <div className="absolute end-0 mt-2 bg-white text-gray-800 rounded shadow-lg overflow-hidden min-w-[120px]">
+                  <div className="absolute end-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden min-w-[140px]">
                     {languages.map((lang) => (
                       <button
                         key={lang.code}
-                        onClick={() => {
-                          setLanguage(lang.code);
-                          setLangOpen(false);
-                        }}
-                        className="block w-full text-start px-4 py-2 hover:bg-green-100"
+                        onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
+                        className={`block w-full text-start px-4 py-2 text-sm hover:bg-slate-50 ${
+                          language === lang.code ? 'bg-slate-100 font-bold' : ''
+                        }`}
                       >
                         {lang.label}
                       </button>
@@ -112,25 +111,28 @@ export default function Navbar() {
               </div>
 
               {user ? (
-                <div className="relative ms-2">
+                <div className="relative">
                   <button
                     onClick={() => setUserOpen(!userOpen)}
-                    className="flex items-center gap-2 px-3 py-2 rounded hover:bg-green-700"
+                    className="flex items-center gap-2 px-3 py-2 hover:bg-slate-50 rounded-lg"
                   >
-                    <FaUserCircle size={20} />
-                    <span className="text-sm">{user.name}</span>
+                    <div className="w-8 h-8 bg-slate-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                      {user?.name?.toUpperCase()}
+                    </div>
+                    <span className="text-sm font-medium text-slate-700">{user?.name?.split(' ')[0]}</span>
+                    <FaChevronDown size={10} className="text-slate-400" />
                   </button>
                   {userOpen && (
-                    <div className="absolute end-0 mt-2 bg-white text-gray-800 rounded shadow-lg overflow-hidden min-w-[160px]">
-                      <Link to="/dashboard" onClick={() => setUserOpen(false)} className="block px-4 py-2 hover:bg-green-100">
+                    <div className="absolute end-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden min-w-[180px]">
+                      <Link to="/dashboard" onClick={() => setUserOpen(false)} className="block px-4 py-2 text-sm hover:bg-slate-50">
                         {t('nav.dashboard')}
                       </Link>
                       {user.role === 'admin' && (
-                        <Link to="/admin" onClick={() => setUserOpen(false)} className="block px-4 py-2 hover:bg-green-100 text-green-700 font-bold">
+                        <Link to="/admin" onClick={() => setUserOpen(false)} className="block px-4 py-2 text-sm font-bold text-blue-600 hover:bg-slate-50">
                           {t('nav.admin')}
                         </Link>
                       )}
-                      <button onClick={handleLogout} className="block w-full text-start px-4 py-2 hover:bg-red-100 text-red-600">
+                      <button onClick={handleLogout} className="block w-full text-start px-4 py-2 text-sm text-red-600 hover:bg-red-50">
                         {t('nav.logout')}
                       </button>
                     </div>
@@ -138,40 +140,38 @@ export default function Navbar() {
                 </div>
               ) : (
                 <>
-                  <Link to="/login" className="ms-2 px-3 py-2 border border-yellow-400 rounded hover:bg-yellow-400 hover:text-green-900 text-sm">
+                  <Link to="/login" className="ms-2 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50 rounded-lg">
                     {t('nav.login')}
                   </Link>
-                  <Link to="/register" className="px-3 py-2 bg-yellow-500 text-green-900 rounded hover:bg-yellow-400 text-sm font-bold">
+                  <Link to="/register" className="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-medium rounded-lg">
                     {t('nav.register')}
                   </Link>
                 </>
               )}
             </div>
 
-            <button className="lg:hidden" onClick={() => setIsOpen(!isOpen)}>
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+            <button className="lg:hidden text-slate-700" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
           </div>
 
           {isOpen && (
-            <div className="lg:hidden pb-4 space-y-1">
+            <div className="lg:hidden pb-4 border-t border-slate-200 mt-2 pt-3 space-y-1">
               {navItems.map((item) => (
-                <Link key={item.key} to={item.path} onClick={() => setIsOpen(false)} className="block px-3 py-2 hover:bg-green-700 rounded">
+                <Link key={item.key} to={item.path} className="block px-3 py-2 text-slate-700 hover:bg-slate-50 rounded">
                   {t(`nav.${item.key}`)}
                 </Link>
               ))}
               {user ? (
                 <>
-                  <Link to="/dashboard" className="block px-3 py-2 hover:bg-green-700 rounded">{t('nav.dashboard')}</Link>
-                  {user.role === 'admin' && (
-                    <Link to="/admin" className="block px-3 py-2 hover:bg-green-700 rounded">{t('nav.admin')}</Link>
-                  )}
-                  <button onClick={handleLogout} className="block w-full text-start px-3 py-2 hover:bg-red-700 rounded">{t('nav.logout')}</button>
+                  <Link to="/dashboard" className="block px-3 py-2 text-slate-700 hover:bg-slate-50 rounded">{t('nav.dashboard')}</Link>
+                  {user.role === 'admin' && <Link to="/admin" className="block px-3 py-2 text-blue-600 font-bold hover:bg-slate-50 rounded">{t('nav.admin')}</Link>}
+                  <button onClick={handleLogout} className="block w-full text-start px-3 py-2 text-red-600 hover:bg-red-50 rounded">{t('nav.logout')}</button>
                 </>
               ) : (
                 <>
-                  <Link to="/login" className="block px-3 py-2 hover:bg-green-700 rounded">{t('nav.login')}</Link>
-                  <Link to="/register" className="block px-3 py-2 hover:bg-green-700 rounded">{t('nav.register')}</Link>
+                  <Link to="/login" className="block px-3 py-2 text-slate-700 hover:bg-slate-50 rounded">{t('nav.login')}</Link>
+                  <Link to="/register" className="block px-3 py-2 bg-slate-900 text-white rounded">{t('nav.register')}</Link>
                 </>
               )}
               <div className="flex gap-2 mt-3 px-3">
@@ -179,7 +179,9 @@ export default function Navbar() {
                   <button
                     key={lang.code}
                     onClick={() => setLanguage(lang.code)}
-                    className={`px-3 py-1 rounded text-sm ${language === lang.code ? 'bg-yellow-500 text-green-900' : 'bg-green-700'}`}
+                    className={`px-3 py-1 rounded text-sm border ${
+                      language === lang.code ? 'bg-slate-900 text-white border-slate-900' : 'border-slate-300 text-slate-700'
+                    }`}
                   >
                     {lang.label}
                   </button>

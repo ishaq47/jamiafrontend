@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaQuestionCircle, FaPaperPlane, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaQuestionCircle, FaPaperPlane, FaChevronLeft, FaChevronRight, FaArrowRight } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 
-// Background slides with images and captions
 const slides = [
   {
     image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1920&q=80',
@@ -27,11 +26,6 @@ const slides = [
     title: { en: 'Authentic Islamic Education', ur: 'خالص اسلامی تعلیمات', ar: 'التعليم الإسلامي الأصيل' },
     subtitle: { en: 'Following the Path of Our Predecessors', ur: 'اسلاف کے نقش قدم پر', ar: 'اتباع طريق السلف الصالح' },
   },
-  {
-    image: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?w=1920&q=80',
-    title: { en: 'Community & Brotherhood', ur: 'امت اور اخوت', ar: 'المجتمع والأخوة' },
-    subtitle: { en: 'Building a Righteous Society Together', ur: 'ایک صالح معاشرے کی تعمیر', ar: 'بناء مجتمع صالح معاً' },
-  },
 ];
 
 export default function Hero() {
@@ -40,44 +34,34 @@ export default function Hero() {
   const navigate = useNavigate();
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState({ type: '', text: '' });
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
   const lang = i18n.language || 'en';
 
-  // Auto-slide effect
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000); // Change slide every 3 seconds
+      setCurrentSlide((p) => (p + 1) % slides.length);
+    }, 5000);
     return () => clearInterval(timer);
   }, [isPaused]);
-
-  const goToSlide = (index) => setCurrentSlide(index);
-
-  const nextSlide = () =>
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-
-  const prevSlide = () =>
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) return navigate('/login');
+    if (question.trim().length < 5) {
+      setMessage({ type: 'error', text: 'Question too short' });
+      return;
+    }
     try {
       setLoading(true);
-      await API.post('/questions', {
-        question,
-        language: lang,
-        category: 'general',
-      });
-      setMessage(t('qa.submitSuccess'));
+      await API.post('/questions', { question: question.trim(), language: lang, category: 'general' });
+      setMessage({ type: 'success', text: t('qa.submitSuccess') });
       setQuestion('');
-      setTimeout(() => setMessage(''), 3000);
+      setTimeout(() => setMessage({ type: '', text: '' }), 3000);
     } catch (err) {
-      setMessage(err.response?.data?.error || 'Error');
+      setMessage({ type: 'error', text: err.response?.data?.error || 'Error submitting' });
     } finally {
       setLoading(false);
     }
@@ -85,53 +69,38 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[650px] lg:min-h-[700px] text-white overflow-hidden"
+      className="relative min-h-[600px] lg:min-h-[680px] text-white overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Background Carousel */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-1000 ${
               currentSlide === index ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <img
-              src={slide.image}
-              alt={slide.title[lang]}
-              className="w-full h-full object-cover"
-            />
-            {/* Dark gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-green-900/90 via-green-800/80 to-green-900/90"></div>
-            {/* Decorative pattern overlay */}
-            <div className="absolute inset-0 opacity-10" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}></div>
+            <img src={slide.image} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60"></div>
           </div>
         ))}
       </div>
 
-      {/* Navigation Arrows */}
       <button
-        onClick={prevSlide}
-        className="absolute start-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-yellow-500 hover:text-green-900 backdrop-blur-sm p-3 rounded-full transition-all duration-300 border border-white/30 hidden md:block"
-        aria-label="Previous slide"
+        onClick={() => setCurrentSlide((p) => (p - 1 + slides.length) % slides.length)}
+        className="absolute start-4 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-sm p-3 rounded-full border border-white/20 hidden md:block"
       >
-        <FaChevronLeft className="text-xl rtl:rotate-180" />
+        <FaChevronLeft className="rtl:rotate-180" />
       </button>
       <button
-        onClick={nextSlide}
-        className="absolute end-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-yellow-500 hover:text-green-900 backdrop-blur-sm p-3 rounded-full transition-all duration-300 border border-white/30 hidden md:block"
-        aria-label="Next slide"
+        onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)}
+        className="absolute end-4 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-sm p-3 rounded-full border border-white/20 hidden md:block"
       >
-        <FaChevronRight className="text-xl rtl:rotate-180" />
+        <FaChevronRight className="rtl:rotate-180" />
       </button>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 grid lg:grid-cols-2 gap-12 items-center min-h-[650px]">
-        {/* Left: Dynamic Text */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
         <div className="relative">
           {slides.map((slide, index) => (
             <div
@@ -142,86 +111,78 @@ export default function Hero() {
                   : 'opacity-0 translate-y-4 absolute top-0 inset-x-0 pointer-events-none'
               }`}
             >
-              <div className="inline-block bg-yellow-500/20 border border-yellow-400/50 text-yellow-300 px-4 py-1 rounded-full text-sm mb-4 backdrop-blur-sm">
-                ✨ {t('tagline')}
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight drop-shadow-2xl">
+              <span className="inline-block bg-white/10 border border-white/20 text-white/90 px-3 py-1 rounded text-xs font-medium tracking-wider uppercase mb-4 backdrop-blur-sm">
+                {t('tagline')}
+              </span>
+              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
                 {slide.title[lang]}
               </h1>
-              <p className="text-xl md:text-2xl text-yellow-300 mb-6 drop-shadow-lg">
+              <p className="text-lg md:text-xl text-white/80 mb-6">
                 {slide.subtitle[lang]}
               </p>
             </div>
           ))}
-          <p className="text-green-100 mb-8 leading-relaxed text-lg max-w-xl drop-shadow">
-            {t('about.description')}
-          </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3">
             <Link
               to="/about"
-              className="bg-yellow-500 hover:bg-yellow-400 text-green-900 font-bold px-8 py-3 rounded-full transition shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+              className="bg-white text-slate-900 hover:bg-slate-100 font-medium px-6 py-3 rounded-lg transition flex items-center gap-2"
             >
-              {t('hero.cta')}
+              {t('hero.cta')} <FaArrowRight className="rtl:rotate-180" />
             </Link>
             <Link
-              to="/qa"
-              className="bg-white/10 hover:bg-white/20 border border-white/40 text-white font-bold px-8 py-3 rounded-full transition backdrop-blur-sm"
+              to="/admissions/apply"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition"
             >
-              {t('nav.qa')}
+              {t('apply.applyNow')}
             </Link>
           </div>
         </div>
 
-        {/* Right: Ask Question Box */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl border border-white/20 hover:border-yellow-400/50 transition-all">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-yellow-500/20 p-3 rounded-full">
-              <FaQuestionCircle className="text-3xl text-yellow-400" />
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-slate-800">
+          <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-200">
+            <div className="bg-blue-50 p-2.5 rounded-lg">
+              <FaQuestionCircle className="text-2xl text-blue-600" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold">{t('hero.askTitle')}</h2>
-              <p className="text-sm text-green-200">{t('hero.askSubtitle')}</p>
+              <h2 className="text-xl font-bold">{t('hero.askTitle')}</h2>
+              <p className="text-xs text-slate-500">{t('hero.askSubtitle')}</p>
             </div>
           </div>
 
           {user ? (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3">
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder={t('hero.askPlaceholder')}
                 required
-                rows="5"
-                className="w-full px-4 py-3 rounded-lg bg-white/90 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 resize-none"
+                rows="4"
+                className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white resize-none"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-yellow-500 hover:bg-yellow-400 text-green-900 font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition disabled:opacity-60 shadow-lg hover:shadow-xl"
+                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
               >
-                <FaPaperPlane />
+                <FaPaperPlane size={14} />
                 {loading ? '...' : t('hero.askButton')}
               </button>
-              {message && (
-                <p className="text-center text-yellow-300 font-medium bg-yellow-500/10 p-2 rounded">
-                  {message}
+              {message.text && (
+                <p className={`text-center text-sm p-2 rounded ${
+                  message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
+                }`}>
+                  {message.text}
                 </p>
               )}
             </form>
           ) : (
-            <div className="text-center py-6">
-              <p className="mb-4 text-green-100">{t('hero.loginToAsk')}</p>
-              <div className="flex gap-3 justify-center">
-                <Link
-                  to="/login"
-                  className="bg-yellow-500 hover:bg-yellow-400 text-green-900 font-bold px-6 py-2 rounded-lg transition shadow-lg"
-                >
+            <div className="text-center py-4">
+              <p className="mb-4 text-slate-600 text-sm">{t('hero.loginToAsk')}</p>
+              <div className="flex gap-2 justify-center">
+                <Link to="/login" className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-medium">
                   {t('auth.login')}
                 </Link>
-                <Link
-                  to="/register"
-                  className="bg-white/20 hover:bg-white/30 text-white font-bold px-6 py-2 rounded-lg border border-white/40 transition"
-                >
+                <Link to="/register" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-5 py-2 rounded-lg text-sm font-medium">
                   {t('auth.register')}
                 </Link>
               </div>
@@ -230,39 +191,17 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Dots Navigation */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              currentSlide === index
-                ? 'w-10 h-3 bg-yellow-500'
-                : 'w-3 h-3 bg-white/50 hover:bg-white/80'
+            onClick={() => setCurrentSlide(index)}
+            className={`h-1.5 rounded-full transition-all ${
+              currentSlide === index ? 'w-8 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/70'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 z-20">
-        <div
-          key={currentSlide}
-          className="h-full bg-yellow-500"
-          style={{
-            animation: isPaused ? 'none' : 'progress 5s linear',
-          }}
-        ></div>
-      </div>
-
-      <style>{`
-        @keyframes progress {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}</style>
     </section>
   );
 }

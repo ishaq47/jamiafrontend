@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
 import API from '../api/axios';
 import QuestionCard from './QuestionCard';
 
@@ -13,23 +14,28 @@ export default function QASection() {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-16 bg-white">
       <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-green-900 mb-3">
-          {t('qa.title')}
-        </h2>
-        <div className="w-24 h-1 bg-yellow-500 mx-auto mb-12"></div>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-slate-900 mb-3">
+            {t('qa.title')}
+          </h2>
+          <div className="w-12 h-1 bg-slate-900 mx-auto"></div>
+        </div>
 
         {questions.length === 0 ? (
-          <p className="text-center text-gray-500">{t('qa.noQuestions')}</p>
+          <div className="bg-white border border-slate-200 rounded-lg p-12 text-center">
+            <p className="text-slate-500">{t('qa.noQuestions')}</p>
+          </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {questions.map((q) => <QuestionCard key={q._id} q={q} />)}
           </div>
         )}
+
         <div className="text-center mt-8">
-          <Link to="/qa" className="inline-block bg-green-800 hover:bg-green-700 text-white px-8 py-3 rounded-full font-bold">
-            {t('common.viewAll')} →
+          <Link to="/qa" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition">
+            View All Q&A <FaArrowRight className="rtl:rotate-180" size={14} />
           </Link>
         </div>
       </div>

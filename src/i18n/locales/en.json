@@ -149,6 +149,14 @@
     "joined": "Joined",
     "actions": "Actions"
   },
+   "apply": {
+    "applyNow": "Apply Now",
+    "title": "Online Admission Application",
+    "subtitle": "Fill the form to apply for admission",
+    "personalInfo": "Personal Information",
+    "contactInfo": "Contact Information",
+    "education": "Education & Documents"
+  },
   "footer": {
     "rights": "All Rights Reserved",
     "quickLinks": "Quick Links",

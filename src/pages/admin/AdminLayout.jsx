@@ -1,7 +1,7 @@
 import { NavLink, Outlet, Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../context/AuthContext";
-import { FaNewspaper, FaQuestion, FaTachometerAlt, FaUsers } from "react-icons/fa";
+import { FaFileAlt, FaNewspaper, FaQuestion, FaTachometerAlt, FaUsers } from "react-icons/fa";
 import { BsBack } from "react-icons/bs";
 import { FaBackward } from "react-icons/fa6";
 
@@ -41,6 +41,9 @@ export default function AdminLayout() {
           <NavLink to="/" className={linkClass}>
             <FaBackward /> {t("admin.backToHome")}
           </NavLink>
+          <NavLink to="/admin/applications" className={linkClass}>
+  <FaFileAlt /> Applications
+</NavLink>
         </nav>
       </aside>
       <main className="flex-1 p-6">

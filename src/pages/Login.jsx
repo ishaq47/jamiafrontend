@@ -14,8 +14,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setLoading(true);
+    setError(''); setLoading(true);
     try {
       await login(form.email, form.password);
       navigate('/');
@@ -27,45 +26,64 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-12 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div className="bg-green-900 text-white text-center py-8">
-          <h2 className="text-3xl font-bold">{t('auth.login')}</h2>
-          <p className="text-yellow-300 mt-2">{t('auth.welcome')}</p>
+    <div className="min-h-[80vh] flex items-center justify-center bg-slate-50 py-12 px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-slate-900">{t('auth.login')}</h1>
+          <p className="text-slate-600 mt-1 text-sm">{t('auth.welcome')}</p>
         </div>
-        <form onSubmit={handleSubmit} className="p-8 space-y-4">
-          {error && <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>}
-          <div className="relative">
-            <FaEnvelope className="absolute top-4 start-3 text-gray-400" />
-            <input
-              type="email" required placeholder={t('auth.email')} value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="w-full ps-10 pe-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-          </div>
-          <div className="relative">
-            <FaLock className="absolute top-4 start-3 text-gray-400" />
-            <input
-              type="password" required placeholder={t('auth.password')} value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="w-full ps-10 pe-3 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
-            />
-          </div>
-          <div className="text-end">
-            <Link to="/forgot-password" className="text-sm text-green-700 hover:underline">
-              {t('auth.forgotPassword')}
-            </Link>
-          </div>
-          <button disabled={loading} className="w-full bg-green-800 hover:bg-green-700 text-white py-3 rounded-lg font-bold disabled:opacity-60">
-            {loading ? '...' : t('auth.loginBtn')}
-          </button>
-          <p className="text-center text-sm text-gray-600">
-            {t('auth.noAccount')}{' '}
-            <Link to="/register" className="text-green-700 font-bold hover:underline">
-              {t('auth.register')}
-            </Link>
-          </p>
-        </form>
+
+        <div className="bg-white border border-slate-200 rounded-lg p-8">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <div className="bg-red-50 text-red-700 p-3 rounded text-sm">{error}</div>
+            )}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                {t('auth.email')}
+              </label>
+              <div className="relative">
+                <FaEnvelope className="absolute top-3.5 start-3 text-slate-400" size={14} />
+                <input
+                  type="email" required value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full ps-10 pe-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-900"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">
+                {t('auth.password')}
+              </label>
+              <div className="relative">
+                <FaLock className="absolute top-3.5 start-3 text-slate-400" size={14} />
+                <input
+                  type="password" required value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  className="w-full ps-10 pe-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-900"
+                />
+              </div>
+            </div>
+            <div className="text-end">
+              <Link to="/forgot-password" className="text-sm text-slate-700 hover:text-slate-900">
+                {t('auth.forgotPassword')}
+              </Link>
+            </div>
+            <button 
+              disabled={loading}
+              className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-lg disabled:opacity-60"
+            >
+              {loading ? '...' : t('auth.loginBtn')}
+            </button>
+          </form>
+        </div>
+
+        <p className="text-center text-sm text-slate-600 mt-6">
+          {t('auth.noAccount')}{' '}
+          <Link to="/register" className="text-slate-900 font-medium hover:underline">
+            {t('auth.register')}
+          </Link>
+        </p>
       </div>
     </div>
   );

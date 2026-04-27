@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import API, { API_URL } from '../api/axios';
 import { useLanguage } from '../context/LanguageContext';
+import { FaCalendarAlt } from 'react-icons/fa';
 import Pagination from '../components/Pagination';
+import PageHeader from '../components/PageHeader';
+import SEO from '../components/SEO';
 
 export default function NewsPage() {
   const { t } = useTranslation();
@@ -14,34 +17,46 @@ export default function NewsPage() {
     API.get(`/news?lang=${language}&page=${page}&limit=9`).then((r) => setData(r.data));
   }, [language, page]);
 
-  const getImageUrl = (img) =>
-    img?.startsWith('/uploads/') ? `${API_URL}${img}` : img;
+  const getImageUrl = (img) => img?.startsWith('/uploads/') ? `${API_URL}${img}` : img;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-green-900 to-green-800 text-white py-20 text-center">
-        <h1 className="text-5xl font-bold mb-4">{t('news.title')}</h1>
-        <div className="w-24 h-1 bg-yellow-500 mx-auto"></div>
-      </div>
-      <div className="max-w-7xl mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <>
+      <SEO 
+        title="News & Announcements | Jamia Uloom Islamia"
+        description="Latest news, events, and announcements."
+      />
+      <PageHeader 
+        title={t('news.title')}
+        subtitle="Stay updated with our latest activities"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {data.news.map((item) => (
-            <article key={item._id} className="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl transition">
+            <article key={item._id} className="bg-white border border-slate-200 rounded-lg overflow-hidden hover:border-slate-300 transition">
               {item.image && (
-                <img src={getImageUrl(item.image)} alt="" className="w-full h-48 object-cover" />
+                <img src={getImageUrl(item.image)} alt="" className="w-full h-44 object-cover" />
               )}
               <div className="p-5">
-                <span className="text-xs text-yellow-600">
+                <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                  <FaCalendarAlt size={11} />
                   {new Date(item.createdAt).toLocaleDateString()}
-                </span>
-                <h3 className="text-xl font-bold text-green-900 mt-2 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm">{item.description?.substring(0, 150)}...</p>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600">{item.description?.substring(0, 120)}...</p>
               </div>
             </article>
           ))}
         </div>
+
+        {data.news.length === 0 && (
+          <div className="bg-white border border-slate-200 rounded-lg p-12 text-center">
+            <p className="text-slate-500">No news available</p>
+          </div>
+        )}
+
         <Pagination page={page} pages={data.pages} onChange={setPage} />
       </div>
-    </div>
+    </>
   );
 }

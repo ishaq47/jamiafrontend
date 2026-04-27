@@ -27,6 +27,8 @@ import AdminQuestions from './pages/admin/AdminQuestions';
 import AdminUsers from './pages/admin/AdminUsers';
 
 import './i18n/i18n';
+import AdminApplications from './pages/admin/AdminApplications';
+import ApplyForm from './pages/ApplyForm';
 
 function Layout({ children }) {
   return (
@@ -57,6 +59,7 @@ export default function App() {
             <Route path="/register" element={<Layout><Register /></Layout>} />
             <Route path="/forgot-password" element={<Layout><ForgotPassword /></Layout>} />
             <Route path="/reset-password/:token" element={<Layout><ResetPassword /></Layout>} />
+            <Route path="/admissions/apply" element={<Layout><ApplyForm /></Layout>} />
 
             <Route path="/dashboard" element={
               <ProtectedRoute>
@@ -73,6 +76,7 @@ export default function App() {
               <Route path="news" element={<AdminNews />} />
               <Route path="questions" element={<AdminQuestions />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="applications" element={<AdminApplications />} />
             </Route>
 
             <Route path="*" element={<Layout><Home /></Layout>} />

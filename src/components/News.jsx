@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import API, { API_URL } from '../api/axios';
 import { useLanguage } from '../context/LanguageContext';
+import { FaCalendarAlt, FaArrowRight } from 'react-icons/fa';
 
 export default function News() {
   const { t } = useTranslation();
@@ -15,35 +16,37 @@ export default function News() {
       .catch(() => setNews([]));
   }, [language]);
 
-  const getImageUrl = (img) =>
-    img?.startsWith('/uploads/') ? `${API_URL}${img}` : img;
+  const getImageUrl = (img) => img?.startsWith('/uploads/') ? `${API_URL}${img}` : img;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-green-900 mb-3">
-          {t('news.title')}
-        </h2>
-        <div className="w-24 h-1 bg-yellow-500 mx-auto mb-12"></div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold text-slate-900 mb-3">{t('news.title')}</h2>
+          <div className="w-12 h-1 bg-slate-900 mx-auto"></div>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-5">
           {news.map((item) => (
-            <article key={item._id} className="bg-gray-50 rounded-lg overflow-hidden shadow hover:shadow-lg transition">
+            <article key={item._id} className="bg-white border border-slate-200 rounded-lg overflow-hidden hover:border-slate-300 transition">
               {item.image && (
-                <img src={getImageUrl(item.image)} alt="" className="w-full h-48 object-cover" />
+                <img src={getImageUrl(item.image)} alt="" className="w-full h-44 object-cover" />
               )}
               <div className="p-5">
-                <span className="text-xs text-yellow-600">
+                <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+                  <FaCalendarAlt size={11} />
                   {new Date(item.createdAt).toLocaleDateString()}
-                </span>
-                <h3 className="text-xl font-bold text-green-900 mt-2 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm">{item.description?.substring(0, 120)}...</p>
+                </div>
+                <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-sm text-slate-600">{item.description?.substring(0, 100)}...</p>
               </div>
             </article>
           ))}
         </div>
+
         <div className="text-center mt-8">
-          <Link to="/news" className="inline-block bg-green-800 hover:bg-green-700 text-white px-8 py-3 rounded-full font-bold">
-            {t('common.viewAll')} →
+          <Link to="/news" className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-3 rounded-lg font-medium transition">
+            All News <FaArrowRight className="rtl:rotate-180" size={14} />
           </Link>
         </div>
       </div>
