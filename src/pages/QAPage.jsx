@@ -37,7 +37,7 @@ console.log("data123", data)
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await API.post('/questions', { question, language: i18n.language, category: qCategory });
+      await API.post('/questions', { _id: user._id, question, language: i18n.language, category: qCategory }, { headers: { Authorization: `Bearer ${user.token}` } });
       setQuestion('');
       setMessage(t('qa.submitSuccess'));
       setTimeout(() => setMessage(''), 3000);
