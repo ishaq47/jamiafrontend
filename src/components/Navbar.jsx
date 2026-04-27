@@ -27,6 +27,7 @@ export default function Navbar() {
     { key: 'about', path: '/about' },
     { key: 'departments', path: '/departments' },
     { key: 'qa', path: '/qa' },
+    { key: 'fatawa', path: '/fatawa' },
     { key: 'admissions', path: '/admissions' },
     { key: 'news', path: '/news' },
     { key: 'contact', path: '/contact' },

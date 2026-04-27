@@ -25,9 +25,9 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-12 px-4">
+    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-slate-50 to-yellow-50 py-12 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
-        <div className="bg-green-900 text-white text-center py-8">
+        <div className="bg-slate-900 text-white text-center py-8">
           <h2 className="text-3xl font-bold">{t('auth.forgotPassword')}</h2>
         </div>
         <form onSubmit={handleSubmit} className="p-8 space-y-4">
@@ -41,10 +41,10 @@ export default function ForgotPassword() {
               className="w-full ps-10 pe-3 py-3 border rounded-lg"
             />
           </div>
-          <button disabled={loading} className="w-full bg-green-800 text-white py-3 rounded-lg font-bold disabled:opacity-60">
+          <button disabled={loading} className="w-full bg-slate-800 text-white py-3 rounded-lg font-bold disabled:opacity-60">
             {loading ? '...' : t('auth.sendResetLink')}
           </button>
-          <Link to="/login" className="block text-center text-green-700 text-sm">{t('common.back')}</Link>
+          <Link to="/login" className="block text-center text-slate-700 text-sm">{t('common.back')}</Link>
         </form>
       </div>
     </div>
