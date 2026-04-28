@@ -66,6 +66,8 @@
     "title": "Welcome to Jamia Darul Uloom Shah Mansoor",
     "subtitle": "Preserving Islamic Knowledge for Generations",
     "cta": "Learn More",
+    "askName" : "Your Name",
+    "askEmail" : "Your Email",
     "askTitle": "Ask Your Question",
     "askSubtitle": "Get answers from our scholars",
     "askPlaceholder": "Type your question here...",

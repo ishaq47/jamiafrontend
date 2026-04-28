@@ -37,6 +37,8 @@ export default function Hero() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [question, setQuestion] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -50,17 +52,23 @@ export default function Hero() {
     }, 5000);
     return () => clearInterval(timer);
   }, [isPaused]);
+   useEffect(() => {
+    if (user) {
+      setName(user.username);
+      setEmail(user.email);
+    }
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user) return navigate('/login');
+    // if (!user) return navigate('/login');
     if (question.trim().length < 5) {
       setMessage({ type: 'error', text: 'Question too short' });
       return;
     }
     try {
       setLoading(true);
-      await API.post('/questions', { question: question.trim(), language: lang, category: 'general' });
+      await API.post('/questions', {userName:name, userEmail:email, question: question.trim(), language: lang, category: 'general' });
       setMessage({ type: 'success', text: t('qa.submitSuccess') });
       setQuestion('');
       setTimeout(() => setMessage({ type: '', text: '' }), 3000);
@@ -142,7 +150,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="bg-white/95 backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-slate-800">
+        <div className="bg-transparent backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-white">
           <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-200">
             <div className="bg-blue-50 p-2.5 rounded-lg">
               <FaQuestionCircle className="text-2xl text-blue-600" />
@@ -153,20 +161,38 @@ export default function Hero() {
             </div>
           </div>
 
-          {user ? (
+          {/* {user ? ( */}
             <form onSubmit={handleSubmit} className="space-y-3">
+              <div className="flex items-center gap-3">
+              <input 
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={t('hero.askName')}
+                required
+                className="w-full px-4 py-2 rounded-lg bg-transparent border border-slate-200 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500 "
+              />
+              <input 
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder={t('hero.askEmail')}
+                required
+                className="w-full px-4 py-2 rounded-lg bg-transparent  border border-slate-200 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 "
+              />
+              </div>
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder={t('hero.askPlaceholder')}
                 required
                 rows="4"
-                className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white resize-none"
+                className="w-full px-4 py-3 rounded-lg bg-transparent border border-slate-200 text-slate-100 placeholder-slate-400  focus:border-blue-500  resize-none"
               />
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
+                className="w-fit px-3 bg-blue-600 hover:bg-slate-500 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
               >
                 <FaPaperPlane size={14} />
                 {loading ? '...' : t('hero.askButton')}
@@ -179,8 +205,8 @@ export default function Hero() {
                 </p>
               )}
             </form>
-          ) : (
-            <div className="text-center py-4">
+          {/* ) : ( */}
+            {/* <div className="text-center py-4">
               <p className="mb-4 text-slate-600 text-sm">{t('hero.loginToAsk')}</p>
               <div className="flex gap-2 justify-center">
                 <Link to="/login" className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-medium">
@@ -191,7 +217,7 @@ export default function Hero() {
                 </Link>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
 
