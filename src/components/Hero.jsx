@@ -163,7 +163,7 @@ export default function Hero() {
 
           {/* {user ? ( */}
             <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
               <input 
                 type="text"
                 value={name}
