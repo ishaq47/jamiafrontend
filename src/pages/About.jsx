@@ -35,7 +35,7 @@ export default function About() {
 
       <div className="max-w-7xl mx-auto px-4 py-16">
         {/* Mission */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-16 mx-auto">
           <p className="text-lg text-slate-700 leading-relaxed">
             {t('pages.aboutContent')}
           </p>
