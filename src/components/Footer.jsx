@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FaFacebook, FaYoutube, FaTiktok } from 'react-icons/fa';
+import webLogo from '../../public/webLogo.png';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -9,8 +10,15 @@ export default function Footer() {
     <footer className="bg-slate-900 text-slate-300 mt-16">
       <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8">
         <div className="md:col-span-2">
-          <h3 className="text-xl font-bold text-white ">{t('siteName')}</h3>
-          <p className="text-slate-400 text-sm leading-relaxed mb-4">{t('tagline')}</p>
+          <Link to="/" className="flex items-center gap-3 mb-4">
+                        <div className="w-12 h-12  rounded-2xl flex items-center justify-center">
+                          <img src={webLogo} alt="logo" className='rounded-2xl'  />
+                        </div>
+                        <div>
+                          <h1 className="text-base font-bold">{t('siteName')}</h1>
+                          <p className="text-xs text-slate-400">{t('tagline')}</p>
+                        </div>
+                      </Link>
           <div className="flex gap-3">
             {Icons.map((Icon, i) => (
               <a key={i} href={Icon.link} className="w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition">
