@@ -4,6 +4,7 @@ import { FaFacebook, FaYoutube, FaTiktok } from 'react-icons/fa';
 
 export default function Footer() {
   const { t } = useTranslation();
+  const Icons = [{Icon: FaFacebook, link:`https://www.facebook.com/share/18dq4CTCYP/`}, { Icon: FaYoutube, link: 'https://youtube.com/@muftifazalalishah?si=XC41EEFrukloPoZ7' },{ Icon : FaTiktok, link: 'https://www.tiktok.com/@mufti.fazal.ali.shah?_r=1&_t=ZN-95p4Jk0LUso'}]
   return (
     <footer className="bg-slate-900 text-slate-300 mt-16">
       <div className="max-w-7xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8">
@@ -11,9 +12,9 @@ export default function Footer() {
           <h3 className="text-xl font-bold text-white mb-3">{t('siteName')}</h3>
           <p className="text-slate-400 text-sm leading-relaxed mb-4">{t('about.description')}</p>
           <div className="flex gap-3">
-            {[FaFacebook, FaYoutube, FaTiktok].map((Icon, i) => (
-              <a key={i} href="#" className="w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition">
-                <Icon size={14} />
+            {Icons.map((Icon, i) => (
+              <a key={i} href={Icon.link} className="w-9 h-9 bg-slate-800 hover:bg-slate-700 rounded-lg flex items-center justify-center transition">
+                <Icon.Icon size={14} />
               </a>
             ))}
           </div>
