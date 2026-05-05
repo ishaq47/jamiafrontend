@@ -1,25 +1,27 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
-import { FaEnvelope, FaLock } from 'react-icons/fa';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useAuth } from "../context/AuthContext";
+import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 
 export default function Login() {
   const { t } = useTranslation();
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); setLoading(true);
+    setError("");
+    setLoading(true);
     try {
       await login(form.email, form.password);
-      navigate('/');
+      navigate("/");
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      setError(err.response?.data?.error || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -29,23 +31,32 @@ export default function Login() {
     <div className="min-h-[80vh] flex items-center justify-center bg-slate-50 py-12 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">{t('auth.login')}</h1>
-          <p className="text-slate-600 mt-1 text-sm">{t('auth.welcome')}</p>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {t("auth.login")}
+          </h1>
+          <p className="text-slate-600 mt-1 text-sm">{t("auth.welcome")}</p>
         </div>
 
         <div className="bg-white border border-slate-200 rounded-lg p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="bg-red-50 text-red-700 p-3 rounded text-sm">{error}</div>
+              <div className="bg-red-50 text-red-700 p-3 rounded text-sm">
+                {error}
+              </div>
             )}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                {t('auth.email')}
+                {t("auth.email")}
               </label>
               <div className="relative">
-                <FaEnvelope className="absolute top-3.5 start-3 text-slate-400" size={14} />
+                <FaEnvelope
+                  className="absolute top-3.5 start-3 text-slate-400"
+                  size={14}
+                />
                 <input
-                  type="email" required value={form.email}
+                  type="email"
+                  required
+                  value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full ps-10 pe-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-900"
                 />
@@ -53,35 +64,60 @@ export default function Login() {
             </div>
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                {t('auth.password')}
+                {t("auth.password")}
               </label>
               <div className="relative">
-                <FaLock className="absolute top-3.5 start-3 text-slate-400" size={14} />
-                <input
-                  type="password" required value={form.password}
-                  onChange={(e) => setForm({ ...form, password: e.target.value })}
-                  className="w-full ps-10 pe-3 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-900"
+                <FaLock
+                  className="absolute top-3.5 start-3 text-slate-400"
+                  size={14}
                 />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  required
+                  minLength="6"
+                  value={form.password}
+                  onChange={(e) =>
+                    setForm({ ...form, password: e.target.value })
+                  }
+                  className="w-full ps-10 pe-10 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:border-slate-900"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute top-3.5 end-3 text-slate-500 hover:text-slate-800"
+                >
+                  {showPassword ? (
+                    <FaEyeSlash size={16} />
+                  ) : (
+                    <FaEye size={16} />
+                  )}
+                </button>
               </div>
             </div>
             <div className="text-end">
-              <Link to="/forgot-password" className="text-sm text-slate-700 hover:text-slate-900">
-                {t('auth.forgotPassword')}
+              <Link
+                to="/forgot-password"
+                className="text-sm text-slate-700 hover:text-slate-900"
+              >
+                {t("auth.forgotPassword")}
               </Link>
             </div>
-            <button 
+            <button
               disabled={loading}
               className="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 rounded-lg disabled:opacity-60"
             >
-              {loading ? '...' : t('auth.loginBtn')}
+              {loading ? "..." : t("auth.loginBtn")}
             </button>
           </form>
         </div>
 
         <p className="text-center text-sm text-slate-600 mt-6">
-          {t('auth.noAccount')}{' '}
-          <Link to="/register" className="text-slate-900 font-medium hover:underline">
-            {t('auth.register')}
+          {t("auth.noAccount")}{" "}
+          <Link
+            to="/register"
+            className="text-slate-900 font-medium hover:underline"
+          >
+            {t("auth.register")}
           </Link>
         </p>
       </div>

@@ -61,7 +61,11 @@ export default function Hero() {
     if (user) {
       setName(user.username);
       setEmail(user.email);
+    } else {
+      setName('');
+      setEmail('');
     }
+
   }, [user]);
 
   const handleSubmit = async (e) => {

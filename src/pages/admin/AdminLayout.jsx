@@ -38,12 +38,13 @@ export default function AdminLayout() {
           <NavLink to="/admin/users" className={linkClass}>
             <FaUsers /> {t("admin.manageUsers")}
           </NavLink>
-          <NavLink to="/" className={linkClass}>
-            <FaBackward /> {t("admin.backToHome")}
-          </NavLink>
+         
           <NavLink to="/admin/applications" className={linkClass}>
   <FaFileAlt /> Applications
 </NavLink>
+ <NavLink to="/" className={linkClass}>
+            <FaBackward /> {t("admin.backToHome")}
+          </NavLink>
         </nav>
       </aside>
       <main className="flex-1 p-6">

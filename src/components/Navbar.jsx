@@ -21,6 +21,7 @@ export default function Navbar() {
 
   useEffect(() => setCurrentDate(formatDate(language)), [language]);
   useEffect(() => setIsOpen(false), [location]);
+  
 
   const navItems = [
     { key: 'home', path: '/' },
