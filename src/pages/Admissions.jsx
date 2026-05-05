@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { FaCheckCircle, FaClipboardList, FaCalendarAlt, FaArrowRight } from 'react-icons/fa';
 import PageHeader from '../components/PageHeader';
 import SEO from '../components/SEO';
+import { useAuth } from '../context/AuthContext';
 
 export default function Admissions() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   
   const requirements = [
     'Must be at least 12 years old',
@@ -44,12 +46,14 @@ export default function Admissions() {
             <h2 className="text-2xl font-bold text-slate-900 mb-2">Academic Year 2024-2025</h2>
             <p className="text-slate-600">{t('pages.admissionsContent')}</p>
           </div>
+          {user?.role == 'admin' ? null : (
           <Link 
             to="/admissions/apply" 
             className="bg-slate-900 hover:bg-slate-800 text-white font-medium px-6 py-3 rounded-lg flex items-center gap-2 whitespace-nowrap"
           >
             Apply Now <FaArrowRight className="rtl:rotate-180" />
           </Link>
+          )}
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">

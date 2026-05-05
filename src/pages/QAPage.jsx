@@ -74,6 +74,7 @@ export default function QAPage() {
 
       <div className="max-w-5xl mx-auto px-4 py-12">
         {/* Ask Question Card */}
+        {user?.role == 'admin' ? null : (
         <div className="bg-white border border-slate-200 rounded-lg p-6 mb-8">
           <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-100">
             <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center">
@@ -131,6 +132,7 @@ export default function QAPage() {
             </div>
           )}
         </div>
+        )}
 
         {/* Search */}
         <div className="relative mb-4">

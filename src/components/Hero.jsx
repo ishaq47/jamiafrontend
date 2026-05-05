@@ -4,10 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FaQuestionCircle, FaPaperPlane, FaChevronLeft, FaChevronRight, FaArrowRight } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
+import madrasa1 from '../../public/madrasa1.jpg';
+import madrasa2 from '../../public/madrasa2.jpg';
+import madrasa3 from '../../public/madrasa3.jpg';
+import madrasa4 from '../../public/madrasa4.jpg';
+
 
 const slides = [
   {
-    image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=1920&q=80',
+    image: madrasa1,
     title: {
   en: 'Welcome to Jamia Darul Uloom Shah Mansoor',
   ur: 'جامعہ دارالعلوم شاہ منصور میں خوش آمدید',
@@ -16,17 +21,17 @@ const slides = [
     subtitle: { en: 'Preserving Islamic Knowledge for Generations', ur: 'نسلوں کے لیے اسلامی علوم کا تحفظ', ar: 'الحفاظ على المعرفة الإسلامية للأجيال' },
   },
   {
-    image: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1920&q=80',
+    image: madrasa2,
     title: { en: 'Center of Islamic Excellence', ur: 'اسلامی تعلیمات کا مرکز', ar: 'مركز التميز الإسلامي' },
     subtitle: { en: 'Nurturing Scholars of Tomorrow', ur: 'کل کے علماء کی تربیت', ar: 'تربية علماء المستقبل' },
   },
   {
-    image: 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=1920&q=80',
+    image: madrasa3,
     title: { en: 'Memorization of the Holy Quran', ur: 'قرآن پاک کی حفاظت', ar: 'حفظ القرآن الكريم' },
     subtitle: { en: 'Connecting Hearts to the Divine Word', ur: 'دلوں کا کلام الہی سے تعلق', ar: 'ربط القلوب بالكلمة الإلهية' },
   },
   {
-    image: 'https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=1920&q=80',
+    image: madrasa4,
     title: { en: 'Authentic Islamic Education', ur: 'خالص اسلامی تعلیمات', ar: 'التعليم الإسلامي الأصيل' },
     subtitle: { en: 'Following the Path of Our Predecessors', ur: 'اسلاف کے نقش قدم پر', ar: 'اتباع طريق السلف الصالح' },
   },
@@ -81,7 +86,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[600px] lg:min-h-[680px] text-white overflow-hidden"
+      className="relative min-h-[600px] lg:min-h-screen text-white overflow-hidden"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -141,16 +146,18 @@ export default function Hero() {
             >
               {t('hero.cta')} <FaArrowRight className="rtl:rotate-180" />
             </Link>
+            {user?.role == 'admin' ? null : (
             <Link
               to="/admissions/apply"
               className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-medium px-4 py-2 rounded-lg transition"
             >
               {t('apply.applyNow')}
             </Link>
+            )}
           </div>
         </div>
-
-        <div className="bg-transparent backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-white">
+  {user?.role == 'admin' ? null : (
+     <div className="bg-transparent backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-white">
           <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-200">
             <div className="bg-blue-50 p-2.5 rounded-lg">
               <FaQuestionCircle className="text-2xl text-blue-600" />
@@ -161,8 +168,9 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* {user ? ( */}
-            <form onSubmit={handleSubmit} className="space-y-3">
+        
+            
+              <form onSubmit={handleSubmit} className="space-y-3">
               <div className="flex flex-wrap items-center gap-3">
               <input 
                 type="text"
@@ -205,20 +213,8 @@ export default function Hero() {
                 </p>
               )}
             </form>
-          {/* ) : ( */}
-            {/* <div className="text-center py-4">
-              <p className="mb-4 text-slate-600 text-sm">{t('hero.loginToAsk')}</p>
-              <div className="flex gap-2 justify-center">
-                <Link to="/login" className="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2 rounded-lg text-sm font-medium">
-                  {t('auth.login')}
-                </Link>
-                <Link to="/register" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-300 px-5 py-2 rounded-lg text-sm font-medium">
-                  {t('auth.register')}
-                </Link>
-              </div>
-            </div>
-          )} */}
         </div>
+  )}
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
