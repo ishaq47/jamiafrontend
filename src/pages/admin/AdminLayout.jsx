@@ -121,7 +121,7 @@ export default function AdminLayout() {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-6 mt-16 md:mt-0 md:ml-64">
+      <main className="flex-1 p-4 md:p-6 mt-16 md:mt-0 md:ml-64 overflow-x-hidden">
         <Outlet />
       </main>
     </div>
