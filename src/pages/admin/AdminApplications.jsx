@@ -111,18 +111,18 @@ export default function AdminApplications() {
       {/* Table */}
       <div
         ref={printRef}
-        className="print-section overflow-x-auto bg-white rounded-lg border"
+        className="print-section overflow-x-auto bg-white  border"
       >
         <table className="w-full text-sm">
-          <thead className="bg-slate-100">
+          <thead className="bg-slate-900 text-white">
             <tr>
-              <th className="p-3 text-left">ID</th>
-              <th className="p-3 text-left">Name</th>
-              <th className="p-3 text-left">Father</th>
-              <th className="p-3 text-left">Department</th>
-              <th className="p-3 text-left">Phone</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left no-print">Actions</th>
+              <th className="p-2 text-left">ID</th>
+              <th className="p-2 text-left border-l">Name</th>
+              <th className="p-2 text-left border-l">Father</th>
+              <th className="p-2 text-left border-l">Department</th>
+              <th className="p-2 text-left border-l">Phone</th>
+              <th className="p-2 text-left border-l">Status</th>
+              <th className="p-2 text-left border-l no-print">Actions</th>
             </tr>
           </thead>
 
@@ -132,15 +132,15 @@ export default function AdminApplications() {
                 key={app._id}
                 className="border-t"
               >
-                <td className="p-3">{index + 1}</td>
-                <td className="p-3">{app.fullName}</td>
-                <td className="p-3">{app.fatherName}</td>
-                <td className="p-3 capitalize">
+                <td className="p-2">{index + 1}</td>
+                <td className="p-2 border-l">{app.fullName}</td>
+                <td className="p-2 border-l">{app.fatherName}</td>
+                <td className="p-2 border-l capitalize">
                   {app.department}
                 </td>
-                <td className="p-3">{app.phone}</td>
+                <td className="p-2 border-l">{app.phone}</td>
 
-                <td className="p-3">
+                <td className="p-2 border-l">
                   <span
                     className={`px-2 py-1 rounded text-xs ${
                       app.status === "approved"
@@ -154,7 +154,7 @@ export default function AdminApplications() {
                   </span>
                 </td>
 
-                <td className="p-3 no-print">
+                <td className="p-2 border-l no-print">
                   <div className="flex gap-2" 
 
                   >

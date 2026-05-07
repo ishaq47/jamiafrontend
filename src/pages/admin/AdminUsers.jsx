@@ -42,27 +42,27 @@ export default function AdminUsers() {
       <input
         type="text" placeholder={t('common.search')}
         value={search} onChange={(e) => setSearch(e.target.value)}
-        className="w-full md:w-96 px-4 py-2 border rounded-lg mb-6"
+        className="w-full md:w-96 px-4 py-2 border mb-6"
       />
 
-      <div className="bg-white rounded-xl shadow overflow-x-auto">
-        <table className="w-full">
+      <div className="bg-white shadow overflow-x-auto">
+        <table className="w-full border">
           <thead className="bg-slate-900 text-white">
             <tr>
-              <th className="p-3 text-start">Name</th>
-              <th className="p-3 text-start">{t('auth.email')}</th>
-              <th className="p-3 text-start">{t('admin.role')}</th>
-              <th className="p-3 text-start">{t('admin.status')}</th>
-              <th className="p-3 text-start">{t('admin.joined')}</th>
-              <th className="p-3 text-start">{t('admin.actions')}</th>
+              <th className="p-2 border-l text-start">Name</th>
+              <th className="p-2 border-l text-start">{t('auth.email')}</th>
+              <th className="p-2 border-l text-start">{t('admin.role')}</th>
+              <th className="p-2 border-l text-start">{t('admin.status')}</th>
+              <th className="p-2 border-l text-start">{t('admin.joined')}</th>
+              <th className="p-2 border-l text-start">{t('admin.actions')}</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((u) => (
               <tr key={u._id} className="border-b hover:bg-gray-50">
-                <td className="p-3 font-bold">{u.username}</td>
-                <td className="p-3 text-sm">{u.email}</td>
-                <td className="p-3">
+                <td className="p-2  font-bold">{u.username}</td>
+                <td className="p-2 border-l text-sm">{u.email}</td>
+                <td className="p-2 border-l">
                   <span className={`px-2 py-1 rounded text-xs flex items-center gap-1 w-fit ${
                     u.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-gray-100 text-gray-700'
                   }`}>
@@ -70,15 +70,15 @@ export default function AdminUsers() {
                     {u.role}
                   </span>
                 </td>
-                <td className="p-3">
+                <td className="p-2 border-l">
                   <span className={`px-2 py-1 rounded text-xs ${
                     u.isBlocked ? 'bg-red-100 text-red-700' : 'bg-green-100 text-slate-700'
                   }`}>
                     {u.isBlocked ? 'Blocked' : 'Active'}
                   </span>
                 </td>
-                <td className="p-3 text-sm">{new Date(u.createdAt).toLocaleDateString()}</td>
-                <td className="p-3">
+                <td className="p-2 border-l text-sm">{new Date(u.createdAt).toLocaleDateString()}</td>
+                <td className="p-2 border-l">
                   { u.role !== 'admin' &&
                   <div className="flex gap-1 flex-wrap">
                     <button
