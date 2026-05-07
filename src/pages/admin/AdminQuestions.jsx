@@ -53,7 +53,7 @@ export default function AdminQuestions() {
         {['all', 'pending', 'answered'].map((f) => (
           <button
             key={f} onClick={() => setFilter(f)}
-            className={` px-2 md:px-4 py-1 md:py-2 rounded-lg capitalize ${
+            className={` px-2 md:px-4 py-1 md:py-2 rounded capitalize border ${
               filter === f ? 'bg-slate-800 text-white' : 'bg-white text-gray-700'
             }`}
           >
