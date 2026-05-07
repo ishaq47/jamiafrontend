@@ -84,7 +84,7 @@ export default function AdminApplications() {
 
         <button
           onClick={handlePrint}
-          className="bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2"
+          className="bg-blue-600 text-white px-2 md:px-4 py-1 md:py-2 rounded flex items-center gap-2"
         >
           <FaPrint />
           Print
@@ -92,12 +92,12 @@ export default function AdminApplications() {
       </div>
 
       {/* Filters */}
-      <div className="flex gap-2 mb-6 no-print">
+      <div className="flex flex-wrap gap-2 mb-6 no-print">
         {["all", "pending", "approved", "rejected"].map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded capitalize ${
+            className={` px-2 md:px-4 py-1 md:py-2  rounded capitalize ${
               filter === f
                 ? "bg-slate-900 text-white"
                 : "bg-white border"

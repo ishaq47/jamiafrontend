@@ -53,7 +53,7 @@ export default function AdminQuestions() {
         {['all', 'pending', 'answered'].map((f) => (
           <button
             key={f} onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-lg capitalize ${
+            className={` px-2 md:px-4 py-1 md:py-2 rounded-lg capitalize ${
               filter === f ? 'bg-slate-800 text-white' : 'bg-white text-gray-700'
             }`}
           >
@@ -113,11 +113,11 @@ export default function AdminQuestions() {
                       />
                       <div className="flex gap-2 mt-12">
                         <button onClick={() => handleAnswer(q._id)}
-                          className="bg-blue-700 text-white px-5 py-2 rounded-lg flex items-center gap-2">
+                          className="bg-blue-700 text-white px-2 md:px-5 py-1 md:py-2 rounded-lg flex items-center gap-2">
                           <FaCheck /> {t('admin.submit')}
                         </button>
                         <button onClick={() => { setActiveId(null); setAnswer(''); }}
-                          className="bg-gray-300 px-5 py-2 rounded-lg">
+                          className="bg-gray-300 px-2 md:px-5 py-1 md:py-2 rounded-lg">
                           {t('common.cancel')}
                         </button>
                       </div>
