@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaQuestionCircle, FaPaperPlane, FaChevronLeft, FaChevronRight, FaArrowRight } from 'react-icons/fa';
+import { FaQuestionCircle, FaPaperPlane, FaArrowRight } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 import API from '../api/axios';
 import madrasa1 from '../../public/madrasa1.jpg';
@@ -9,16 +9,19 @@ import madrasa2 from '../../public/madrasa2.jpg';
 import madrasa3 from '../../public/madrasa3.jpg';
 import madrasa4 from '../../public/madrasa4.jpg';
 
-
 const slides = [
   {
     image: madrasa1,
     title: {
-  en: 'Welcome to Jamia Darul Uloom Shah Mansoor',
-  ur: 'جامعہ دارالعلوم شاہ منصور میں خوش آمدید',
-  ar: 'مرحباً بكم في جامعة دار العلوم شاه منصور'
-},
-    subtitle: { en: 'Preserving Islamic Knowledge for Generations', ur: 'نسلوں کے لیے اسلامی علوم کا تحفظ', ar: 'الحفاظ على المعرفة الإسلامية للأجيال' },
+      en: 'Welcome to Jamia Darul Uloom Shah Mansoor',
+      ur: 'جامعہ دارالعلوم شاہ منصور میں خوش آمدید',
+      ar: 'مرحباً بكم في جامعة دار العلوم شاه منصور'
+    },
+    subtitle: { 
+      en: 'Preserving Islamic Knowledge for Generations', 
+      ur: 'نسلوں کے لیے اسلامی علوم کا تحفظ', 
+      ar: 'الحفاظ على المعرفة الإسلامية للأجيال' 
+    },
   },
   {
     image: madrasa2,
@@ -50,6 +53,8 @@ export default function Hero() {
   const [isPaused, setIsPaused] = useState(false);
   const lang = i18n.language || 'en';
 
+  const isRtl = lang === 'ur' || lang === 'ar';
+
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
@@ -57,28 +62,27 @@ export default function Hero() {
     }, 5000);
     return () => clearInterval(timer);
   }, [isPaused]);
-   useEffect(() => {
+
+  useEffect(() => {
     if (user) {
-      setName(user.username);
-      setEmail(user.email);
+      setName(user.username || user.name || '');
+      setEmail(user.email || '');
     } else {
       setName('');
       setEmail('');
     }
-
   }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if (!user) return navigate('/login');
     if (question.trim().length < 5) {
       setMessage({ type: 'error', text: 'Question too short' });
       return;
     }
     try {
       setLoading(true);
-      await API.post('/questions', {userName:name, userEmail:email, question: question.trim(), language: lang, category: 'general' });
-      setMessage({ type: 'success', text: t('qa.submitSuccess') });
+      await API.post('/questions', { userName: name, userEmail: email, question: question.trim(), language: lang, category: 'general' });
+      setMessage({ type: 'success', text: t('qa.submitSuccess') || 'Question submitted successfully!' });
       setQuestion('');
       setTimeout(() => setMessage({ type: '', text: '' }), 3000);
     } catch (err) {
@@ -90,10 +94,12 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[600px] lg:min-h-screen text-white overflow-hidden"
+      className="relative min-h-[620px] lg:min-h-[85vh] text-white overflow-hidden bg-emerald-950 font-serif"
+      dir={isRtl ? 'rtl' : 'ltr'}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Background Image Carousel with Islamic Deep Emerald Overlay */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
           <div
@@ -103,26 +109,16 @@ export default function Hero() {
             }`}
           >
             <img src={slide.image} alt="" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/80 to-slate-900/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/80 to-emerald-950/60"></div>
           </div>
         ))}
       </div>
 
-      <button
-        onClick={() => setCurrentSlide((p) => (p - 1 + slides.length) % slides.length)}
-        className="absolute start-4 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-sm p-3 rounded-full border border-white/20 hidden md:block"
-      >
-        <FaChevronLeft className="rtl:rotate-180" />
-      </button>
-      <button
-        onClick={() => setCurrentSlide((p) => (p + 1) % slides.length)}
-        className="absolute end-4 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-sm p-3 rounded-full border border-white/20 hidden md:block"
-      >
-        <FaChevronRight className="rtl:rotate-180" />
-      </button>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-12 items-center min-h-[600px]">
-        <div className="relative">
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center min-h-[600px]">
+        
+        {/* Left Banner Info */}
+        <div className="lg:col-span-7 relative">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -132,102 +128,120 @@ export default function Hero() {
                   : 'opacity-0 translate-y-4 absolute top-0 inset-x-0 pointer-events-none'
               }`}
             >
-              <span className="inline-block bg-white/10 border border-white/20 text-white/90 px-3 py-1 rounded text-xs font-medium tracking-wider uppercase mb-4 backdrop-blur-sm">
+              <span className="inline-flex items-center gap-2 bg-emerald-900/60 border border-amber-400/30 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase mb-5 backdrop-blur-md shadow-inner">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                 {t('tagline')}
               </span>
-              <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-5 leading-tight text-white tracking-tight">
                 {slide.title[lang]}
               </h1>
-              <p className="text-lg md:text-xl text-white/80 mb-6">
+              <p className="text-base sm:text-lg text-emerald-100/90 mb-8 max-w-2xl font-light leading-relaxed">
                 {slide.subtitle[lang]}
               </p>
             </div>
           ))}
-          <div className="flex flex-wrap gap-3">
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 pt-2">
             <Link
               to="/about"
-              className="bg-white text-slate-900 hover:bg-slate-100 hover:scale-105 font-medium px-4 py-2 rounded-lg transition flex items-center gap-2"
+              className="bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold px-6 py-3 rounded-xl transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg flex items-center gap-2 text-sm"
             >
-              {t('hero.cta')} <FaArrowRight className="rtl:rotate-180" />
+              {t('hero.cta')} <FaArrowRight className="rtl:rotate-180" size={12} />
             </Link>
-            {user?.role == 'admin' ? null : (
-            <Link
-              to="/admissions/apply"
-              className="bg-blue-600 hover:bg-blue-700 hover:scale-105 text-white font-medium px-4 py-2 rounded-lg transition"
-            >
-              {t('apply.applyNow')}
-            </Link>
+            {user?.role !== 'admin' && (
+              <Link
+                to="/admissions/apply"
+                className="bg-emerald-900/80 hover:bg-emerald-800 text-amber-100 font-semibold px-6 py-3 rounded-xl border border-emerald-500/30 backdrop-blur-md transition-all duration-200 transform hover:-translate-y-0.5 shadow-md text-sm"
+              >
+                {t('apply.applyNow')}
+              </Link>
             )}
           </div>
         </div>
-  {user?.role == 'admin' ? null : (
-     <div className="bg-transparent backdrop-blur-sm rounded-xl p-7 shadow-xl border border-white/20 text-white">
-          <div className="flex items-center gap-3 mb-5 pb-4 border-b border-slate-200">
-            <div className="bg-blue-50 p-2.5 rounded-lg">
-              <FaQuestionCircle className="text-2xl text-blue-600" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold">{t('hero.askTitle')}</h2>
-              <p className="text-xs text-slate-500">{t('hero.askSubtitle')}</p>
-            </div>
-          </div>
 
-        
-            
-              <form onSubmit={handleSubmit} className="space-y-3">
-              <div className="flex flex-wrap items-center gap-3">
-              <input 
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder={t('hero.askName')}
-                required
-                className="w-full px-4 py-2 rounded-lg bg-transparent border border-slate-200 text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-500 "
-              />
-              <input 
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t('hero.askEmail')}
-                required
-                className="w-full px-4 py-2 rounded-lg bg-transparent  border border-slate-200 text-slate-200 placeholder-slate-400 focus:outline-none focus:border-blue-500 "
-              />
+        {/* Right Form Card (Ask Question / Fatwa) */}
+        {user?.role !== 'admin' && (
+          <div className="lg:col-span-5 bg-emerald-950/70 backdrop-blur-md rounded-2xl p-6 sm:p-8 shadow-2xl border border-emerald-500/20 text-white relative">
+            <div className="flex items-center gap-3.5 mb-6 pb-4 border-b border-emerald-800/60">
+              <div className="bg-amber-400/20 border border-amber-400/30 p-3 rounded-xl text-amber-300">
+                <FaQuestionCircle className="text-xl" />
               </div>
-              <textarea
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder={t('hero.askPlaceholder')}
-                required
-                rows="4"
-                className="w-full px-4 py-3 rounded-lg bg-transparent border border-slate-200 text-slate-100 placeholder-slate-400  focus:border-blue-500  resize-none"
-              />
+              <div>
+                <h2 className="text-lg sm:text-xl font-bold text-white">{t('hero.askTitle')}</h2>
+                <p className="text-xs text-emerald-200/80">{t('hero.askSubtitle')}</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={t('hero.askName')}
+                    required
+                    className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/40 border border-emerald-700/50 text-emerald-50 placeholder-emerald-300/50 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder={t('hero.askEmail')}
+                    required
+                    className="w-full px-4 py-2.5 rounded-xl bg-emerald-900/40 border border-emerald-700/50 text-emerald-50 placeholder-emerald-300/50 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <textarea
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  placeholder={t('hero.askPlaceholder')}
+                  required
+                  rows="3"
+                  className="w-full px-4 py-3 rounded-xl bg-emerald-900/40 border border-emerald-700/50 text-emerald-50 placeholder-emerald-300/50 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 resize-none transition"
+                />
+              </div>
+
               <button
                 type="submit"
                 disabled={loading}
-                className="w-fit px-3 bg-blue-600 hover:bg-slate-500 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 disabled:opacity-60"
+                className="w-full py-3 px-5 bg-amber-400 hover:bg-amber-300 text-emerald-950 font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-md disabled:opacity-60 text-sm"
               >
-                <FaPaperPlane size={14} />
+                <FaPaperPlane size={13} />
                 {loading ? '...' : t('hero.askButton')}
               </button>
+
               {message.text && (
-                <p className={`text-center text-sm p-2 rounded ${
-                  message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-                }`}>
+                <p
+                  className={`text-center text-xs p-2.5 rounded-xl border ${
+                    message.type === 'success'
+                      ? 'bg-emerald-900/80 border-emerald-500 text-emerald-200'
+                      : 'bg-red-950/80 border-red-500/50 text-red-200'
+                  }`}
+                >
                   {message.text}
                 </p>
               )}
             </form>
-        </div>
-  )}
+          </div>
+        )}
       </div>
 
+      {/* Slide Indicators */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`h-1.5 rounded-full transition-all ${
-              currentSlide === index ? 'w-8 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/70'
+            aria-label={`Slide ${index + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              currentSlide === index ? 'w-8 bg-amber-400' : 'w-2 bg-emerald-200/30 hover:bg-emerald-200/60'
             }`}
           />
         ))}
