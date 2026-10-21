@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /dashboard
-Disallow: /login
-Disallow: /register
-Disallow: /reset-password
 
-Sitemap: jamiafrontend-henna.vercel.app/sitemap.xml
+# Disallow authenticated or private admin routes
+Disallow: /admin
+Disallow: /profile
+
+# Sitemap declaration
+Sitemap: https://jduss.vercel.app/sitemap.xml
